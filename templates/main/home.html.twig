@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Home{% endblock %}
+{% block header %}
+    {% if not app.user %}
+        <h1> Welcome on Bucket List </h1>
+    {% else %}
+        <h1> Hello {{ app.user.pseudo }} !</h1>
+    {% endif %}
+{% endblock %}
