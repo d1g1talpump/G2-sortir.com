@@ -4,7 +4,9 @@
 {% block header %}
     {% if not app.user %}
         <h1> Wanna Go Out ? </h1>
+        <button name="LogIn/Register"><a href="{{ path('app_login') }}">LogIn/Register</a></button>
     {% else %}
-        <h1> Hello {{ app.user.pseudo }} !</h1>
+        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
+        <p> Here's a list of events </p>
     {% endif %}
 {% endblock %}
