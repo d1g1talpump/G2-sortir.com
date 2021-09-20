@@ -1,11 +1,20 @@
 <nav>
     <ul>
         <li>
+            {% if app.user %}
             <a href="{{ path('main_home') }}">
                 <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
             </a>
+            {% else %}
+            <a href="{{ path('app_login') }}">
+                <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
+            </a>
+            {% endif %}
         </li>
+        {% if app.user %}
         <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
         <li><a href="{{ path('goOut_add') }}" title="Add an Event">Add an Event</a></li>
+        <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out | {{ app.user.pseudo }}</a></li>
+        {% endif %}
     </ul>
 </nav>
