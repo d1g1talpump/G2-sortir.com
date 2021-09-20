@@ -3,11 +3,9 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-    {{ form_widget(registrationForm) }}
-
-    <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {% if app.user %}
+        {{ include('inc/editProfile.html.twig') }}
+    {% else %}
+        {{ include('inc/register.html.twig') }}
+    {% endif %}
 {% endblock %}
