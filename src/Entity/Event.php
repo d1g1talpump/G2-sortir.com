@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,6 +66,22 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="event")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="organiser")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organiser;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -175,6 +193,45 @@ class Event
     public function setPlace(?Place $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrganiser(): ?User
+    {
+        return $this->organiser;
+    }
+
+    public function setOrganiser(?User $organiser): self
+    {
+        $this->organiser = $organiser;
 
         return $this;
     }
