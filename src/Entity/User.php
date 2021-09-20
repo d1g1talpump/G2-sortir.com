@@ -79,6 +79,11 @@ class User implements UserInterface
      */
     private $organiser;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $pseudo;
+
     public function __construct()
     {
         $this->event = new ArrayCollection();
@@ -117,6 +122,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
+        //TODO set up the change of roles
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
@@ -288,6 +294,18 @@ class User implements UserInterface
                 $organiser->setOrganiser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
