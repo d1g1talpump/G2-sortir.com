@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -61,6 +63,33 @@ class User implements UserInterface
      */
     private $active;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="users")
+     */
+    private $event;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organiser")
+     */
+    private $organiser;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $pseudo;
+
+    public function __construct()
+    {
+        $this->event = new ArrayCollection();
+        $this->organiser = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,6 +122,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
+        //TODO set up the change of roles
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
@@ -198,6 +228,84 @@ class User implements UserInterface
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->event->contains($event)) {
+            $this->event[] = $event;
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        $this->event->removeElement($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getOrganiser(): Collection
+    {
+        return $this->organiser;
+    }
+
+    public function addOrganiser(Event $organiser): self
+    {
+        if (!$this->organiser->contains($organiser)) {
+            $this->organiser[] = $organiser;
+            $organiser->setOrganiser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganiser(Event $organiser): self
+    {
+        if ($this->organiser->removeElement($organiser)) {
+            // set the owning side to null (unless already changed)
+            if ($organiser->getOrganiser() === $this) {
+                $organiser->setOrganiser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }

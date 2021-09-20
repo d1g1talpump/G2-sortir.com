@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <ol>
+        {% for campus in allCampus %}
+            <li>{{ campus.name }}</li>
+        {% endfor %}
+    </ol>
+{% endblock %}
