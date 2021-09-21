@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+    <h1>My Profile</h1>
+
+    <div>
+        <span>Pseudo : {{ app.user.pseudo }}</span>
+    </div>
+    <div>
+        <span>First Name : {{ app.user.firstname }}</span>
+    </div>
+    <div>
+        <span>Last Name : {{ app.user.lastname }}</span>
+    </div>
+    <div>
+        <span>Telephone : {{ app.user.telephone }}</span>
+    </div>
+    <div>
+        <span>Email : {{ app.user.email }}</span>
+    </div>
+    <div>
+        <span>Campus : {{ app.user.campus.name }}</span>
+    </div>
+    <div>
+        <button>
+            <a href="{{ path('profile_edit') }}">Edit profile</a>
+        </button>
+    </div>
+{% endblock %}
