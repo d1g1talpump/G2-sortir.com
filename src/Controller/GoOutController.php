@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
@@ -24,8 +25,9 @@ class GoOutController extends AbstractController
     public function addEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
         $event = new Event();
-        $user = $this->getUser();
+        $status = new Status();
 
+        $user = $this->getUser();
         $event->setOrganiser($user);
         $event->setCampus($user->getCampus());
 
@@ -34,12 +36,18 @@ class GoOutController extends AbstractController
         $eventForm->handleRequest($request);
 
         if($eventForm->isSubmitted() && $eventForm->isValid()){
-
+            if($eventForm->get("createEvent")->isClicked()){
+                $status = $entityManager->find(Status::class, 1);
+            }
+            elseif ($eventForm->get("publishEvent")->isClicked()){
+                $status = $entityManager->find(Status::class, 2);
+            }
+            $event->setStatus($status);
             $entityManager->persist($event);
             $entityManager->flush();
 
             $this->addFlash('success', 'Event added !');
-            //TODO return $this->redirectToRoute('');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('go_out/add.html.twig', [

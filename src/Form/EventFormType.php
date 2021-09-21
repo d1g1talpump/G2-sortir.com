@@ -10,6 +10,7 @@ use App\Entity\Status;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,9 @@ class EventFormType extends AbstractType
             ->add('startDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
+                'required' => false,
             ])
+
             ->add('limitSubDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
@@ -40,10 +43,8 @@ class EventFormType extends AbstractType
                 'choice_label' => 'name',
             ])
 
-            ->add('status', EntityType::class, [
-                'class' => Status::class,
-                'choice_label' => 'label',
-            ])
+            ->add('createEvent', SubmitType::class)
+            ->add('publishEvent', SubmitType::class)
         ;
     }
 

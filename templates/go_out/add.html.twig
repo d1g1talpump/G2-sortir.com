@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Add an event</h1>
     <div class="flex-container">
+
         {{ form_start(eventForm) }}
         {{ form_label(eventForm.name) }}
         {{ form_widget(eventForm.name) }}
@@ -27,9 +28,6 @@
         {{ form_label(eventForm.place) }}
         {{ form_widget(eventForm.place) }}
 
-        {{ form_label(eventForm.status) }}
-        {{ form_widget(eventForm.status) }}
-
         <div class=".label">
             Campus
         </div>
@@ -37,11 +35,9 @@
             {{ app.user.campus.name }}
         </div>
 
-        <button type="submit" class="btn">Confirm</button>
-
         {{ form_end(eventForm) }}
 
-        <button class="btn"><a href="{{ path('main_home') }}">Cancel</a></button>
+        <a href="{{ path('main_home') }}">Back to home</a>
     </div>
 
 {% endblock %}

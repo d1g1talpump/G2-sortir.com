@@ -28,7 +28,7 @@ class Event
     private $name;
 
     /**
-     * @ORM\Column(type="datetime + 3")
+     * @ORM\Column(type="datetime")
      * @Assert\GreaterThan("today")
      */
     private $startDate;
