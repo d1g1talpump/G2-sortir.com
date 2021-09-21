@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.user %}
+        {{ include('inc/edit.html.twig') }}
+    {% else %}
+        {{ include('inc/register.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if app.user %}
+        Edit
+    {% else %}
+        Register
+    {% endif %}
+{% endblock %}
+
