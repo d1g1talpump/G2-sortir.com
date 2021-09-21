@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} | Home{% endblock %}
-{% block header %}
+
+{% block body %}
     {% if not app.user %}
-        <h1> Wanna Go Out ? </h1>
-        <button name="LogIn/Register"><a href="{{ path('app_login') }}">LogIn/Register</a></button>
+        <a href="{{ path('app_login') }}">
+            <img  class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
+        </a>
+        <h1 class="headmess"> Wanna Go Out ? </h1>
+        <button class="mainlog" name="LogIn/Register"><a href="{{ path('app_login') }}">LogIn/Register</a></button>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <p> Here's a list of events </p>
     {% endif %}
+
 {% endblock %}

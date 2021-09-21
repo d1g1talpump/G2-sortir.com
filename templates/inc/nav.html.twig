@@ -5,10 +5,6 @@
             <a href="{{ path('main_home') }}">
                 <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
             </a>
-            {% else %}
-            <a href="{{ path('app_login') }}">
-                <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
-            </a>
             {% endif %}
         </li>
         {% if app.user %}

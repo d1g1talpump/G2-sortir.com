@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="{{ asset('img/favicon-GO.png') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="public/js/test.js"></script>
         <title>{% block title %}GO !{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
@@ -18,11 +19,16 @@
         {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
     <body>
-    <header>
-        {% include 'inc/nav.html.twig' %}
-        {% block header %}{% endblock %}
-    </header>
+        <header>
+            {% block header %}
+                {% if app.user %}
+                    {% include 'inc/nav.html.twig' %}
+                {% endif %}
+            {% endblock %}
+        </header>
+
     {# read and display all flash messages #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -31,11 +37,13 @@
             </div>
         {% endfor %}
     {% endfor %}
+
     <main>
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
     </main>
     <footer>
-        <p>&copy;Go Out {{ "now"|date("Y") }}</p>
+        <p id="copyright">&copy; Go Out {{ "now"|date("Y") }}</p>
     </footer>
 
     </body>
