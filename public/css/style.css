@@ -13,9 +13,37 @@ a:hover{
     color: #a71d5d;
 }
 
+body{
+    min-height: 100%;
+}
+
+button{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+    border-radius: 30px;
+}
+
+footer {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 header img{
     height: 70px;
     rotation: 330deg;
+}
+
+input{
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+    border-radius: 30px;
 }
 
 img{
@@ -34,6 +62,10 @@ nav li{
     margin-right: 1rem;
 }
 
+/* id */
+
+
+
 /* class */
 
 .flash{
@@ -46,6 +78,30 @@ nav li{
 
 .flash-success{
     background-color: #88B04B;
+}
+
+.headmess{
+    font-family: Vesper,sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.mainimg{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 50%;
+}
+
+.mainlog{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+    border-radius: 30px;
 }
 /*///////*/
 .flex-container{
@@ -65,6 +121,8 @@ input, textarea, select{
     min-width: 200px;
     max-width: 50%;
 }
+
+
 
 button{
     margin: 1.5% 0;
