@@ -11,11 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationFormType extends AbstractType
+class ManageProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('pseudo')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('telephone')
             ->add('email')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -25,10 +29,6 @@ class RegistrationFormType extends AbstractType
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password'],
             ])
-            ->add('firstname')
-            ->add('lastname')
-            ->add('telephone')
-            ->add('pseudo')
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name'
