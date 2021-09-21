@@ -14,6 +14,7 @@
         {% if app.user %}
         <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
         <li><a href="{{ path('goOut_add') }}" title="Add an Event">Add an Event</a></li>
+        <li><a href="{{ path('profile_view')}}" title="View Profile">View Profile</a></li>
         <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out | {{ app.user.pseudo }}</a></li>
         {% endif %}
     </ul>
