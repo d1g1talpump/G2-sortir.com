@@ -6,11 +6,38 @@
     <h1>Add an event</h1>
     <div class="flex-container">
         {{ form_start(eventForm) }}
-        {{ form_widget(eventForm) }}
-        <button type="submit" class="btn">Create</button>
-        <button type="submit" class="btn">Publish</button>
-        <button type="submit" class="btn">Cancel</button>
+            {{ form_label(eventForm.name) }}
+            {{ form_widget(eventForm.name) }}
+
+        {{ form_label(eventForm.startDate) }}
+        {{ form_widget(eventForm.startDate) }}
+
+        {{ form_label(eventForm.limitSubDate) }}
+        {{ form_widget(eventForm.limitSubDate) }}
+
+        {{ form_label(eventForm.maxSub) }}
+        {{ form_widget(eventForm.maxSub) }}
+
+        {{ form_label(eventForm.duration) }}
+        {{ form_widget(eventForm.duration) }}
+
+        {{ form_label(eventForm.infos) }}
+        {{ form_widget(eventForm.infos) }}
+
+        <div class=".label">
+            Campus
+        </div>
+        <div class=".input">
+            {{ app.user.campus.name }}
+        </div>
+
+        <button type="submit" class="btn">Confirm</button>
+        <button type="reset" class="btn">Cancel</button>
+
         {{ form_end(eventForm) }}
+
+
+
     </div>
 
 {% endblock %}

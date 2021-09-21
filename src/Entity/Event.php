@@ -21,6 +21,7 @@ class Event
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @Assert\Length(max=150)
      * @ORM\Column(type="string", length=150)
      */
@@ -30,11 +31,6 @@ class Event
      * @ORM\Column(type="datetime")
      */
     private $startDate;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $endDate;
 
     /**
      * @ORM\Column(type="datetime")
@@ -116,18 +112,6 @@ class Event
     public function setStartDate(\DateTimeInterface $startDate): self
     {
         $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    public function getEndDate(): ?\DateTimeInterface
-    {
-        return $this->endDate;
-    }
-
-    public function setEndDate(\DateTimeInterface $endDate): self
-    {
-        $this->endDate = $endDate;
 
         return $this;
     }
