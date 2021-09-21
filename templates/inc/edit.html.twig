@@ -1,0 +1,42 @@
+<h1>Edit</h1>
+
+{{ form_start(manageProfileForm) }}
+<div>
+    {{ form_label(manageProfileForm.pseudo) }}
+    {{ form_widget(manageProfileForm.pseudo, {'attr': {'value': app.user.pseudo}}) }}
+</div>
+
+<div>
+    {{ form_label(manageProfileForm.firstname) }}
+    {{ form_widget(manageProfileForm.firstname, {'attr': {'value': app.user.firstname}}) }}
+</div>
+
+<div>
+    {{ form_label(manageProfileForm.lastname) }}
+    {{ form_widget(manageProfileForm.lastname, {'attr': {'value': app.user.lastname}}) }}
+</div>
+
+<div>
+    {{ form_label(manageProfileForm.telephone) }}
+    {{ form_widget(manageProfileForm.telephone, {'attr': {'value': app.user.telephone}}) }}
+</div>
+
+<div>
+    {{ form_label(manageProfileForm.email) }}
+    {{ form_widget(manageProfileForm.email, {'attr': {'value': app.user.email}}) }}
+</div>
+
+<div>
+    {{ form_widget(manageProfileForm.password) }}
+</div>
+
+<div>
+    {{ form_label(manageProfileForm.campus) }}
+    {{ form_widget(manageProfileForm.campus, {'attr': {'value': app.user.campus.name}}) }}
+</div>
+
+<button type="submit" class="btn">Save</button>
+<button type="button" class="btn">
+    <a href="{{ path('main_home') }}">Cancel</a>
+</button>
+{{ form_end(manageProfileForm) }}
