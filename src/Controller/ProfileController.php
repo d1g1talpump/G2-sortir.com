@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\User;
+use App\Form\EditProfileType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\AppAuthenticator;
@@ -77,8 +78,44 @@ class ProfileController extends AbstractController
     /**
      * @Route ("/edit", name="edit")
      */
-    public function editProfile(): Response
+    public function editProfile(
+        UserRepository            $userRepository,
+        Request                   $request,
+        GuardAuthenticatorHandler $guardHandler,
+        AppAuthenticator          $authenticator
+    ): Response
     {
+        $user = $userRepository->find($this->getUser()->getId());
+
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+//            // encode the plain password
+//            $user->setPassword(
+//                $passwordEncoder->encodePassword(
+//                    $user,
+//                    $form->get('password')->getData()
+//                )
+//            );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            //TODO do anything else you need here, like send an email
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'editProfileForm' => $form->createView(),
+        ]);
 
     }
 }
