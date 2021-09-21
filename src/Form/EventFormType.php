@@ -11,6 +11,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,13 +21,8 @@ class EventFormType extends AbstractType
     {
         $builder
             ->add('name')
-            //Dates
 
             ->add('startDate', DateTimeType::class, [
-                'widget' => 'single_text',
-                'input'  => 'datetime_immutable',
-            ])
-            ->add('endDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
             ])
@@ -35,50 +31,19 @@ class EventFormType extends AbstractType
                 'input'  => 'datetime_immutable',
             ])
 
-            //
             ->add('maxSub')
             ->add('duration')
             ->add('infos')
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
 
-                'choice_label' => 'name',
-            ])
-
-            /*TODO
-            ->add('city', EntityType::class, [
-                'class' => City::class,
-                'choice_label' => 'name',
-            ])
-            */
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'choice_label' => 'name',
             ])
-            /*TODO
-            ->add('street', EntityType::class, [
-                'class' => Place::class,
-                'choice_label' => 'name',
+
+            ->add('status', EntityType::class, [
+                'class' => Status::class,
+                'choice_label' => 'label',
             ])
-            */
-            /*TODO
-            ->add('postalCode', EntityType::class, [
-                'class' => City::class,
-                'choice_label' => 'name',
-            ])
-            */
-            /*TODO
-            ->add('latitude', EntityType::class, [
-                'class' => Place::class,
-                'choice_label' => 'name',
-            ])
-            */
-            /*TODO
-            ->add('longitude', EntityType::class, [
-                'class' => Place::class,
-                'choice_label' => 'name',
-            ])
-            */
         ;
     }
 

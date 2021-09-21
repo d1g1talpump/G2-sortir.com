@@ -29,13 +29,12 @@ class GoOutController extends AbstractController
         $event->setOrganiser($user);
         $event->setCampus($user->getCampus());
 
-        dump($user);
-
         $eventForm = $this->createForm(EventFormType::class, $event);
 
         $eventForm->handleRequest($request);
 
         if($eventForm->isSubmitted() && $eventForm->isValid()){
+
             $entityManager->persist($event);
             $entityManager->flush();
 
@@ -45,6 +44,7 @@ class GoOutController extends AbstractController
 
         return $this->render('go_out/add.html.twig', [
             'eventForm' => $eventForm->createView(),
+            'campus' => $user->getCampus(),
         ]);
     }
 
