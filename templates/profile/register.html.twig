@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+        <h1>Register</h1>
+
+        {{ form_start(registrationForm) }}
+        <div>
+            {{ form_label(registrationForm.pseudo) }}
+            {{ form_widget(registrationForm.pseudo) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.firstname) }}
+            {{ form_widget(registrationForm.firstname) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.lastname) }}
+            {{ form_widget(registrationForm.lastname) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.telephone) }}
+            {{ form_widget(registrationForm.telephone) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+        </div>
+        <div>
+            {{ form_widget(registrationForm.password) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.campus) }}
+            {{ form_widget(registrationForm.campus) }}
+        </div>
+
+        <div>
+            <p style="background-color: #88B04B">My Photo {# TODO upload photo function #}</p>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+        <button type="reset" class="btn">Cancel</button>
+        {{ form_end(registrationForm) }}
+{% endblock %}
