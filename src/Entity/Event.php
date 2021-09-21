@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -20,6 +21,7 @@ class Event
     private $id;
 
     /**
+     * @Assert\Length(max=150)
      * @ORM\Column(type="string", length=150)
      */
     private $name;
@@ -77,6 +79,11 @@ class Event
      * @ORM\JoinColumn(nullable=false)
      */
     private $organiser;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $duration;
 
     public function __construct()
     {
@@ -232,6 +239,18 @@ class Event
     public function setOrganiser(?User $organiser): self
     {
         $this->organiser = $organiser;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

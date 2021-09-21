@@ -1,3 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | add{% endblock %}
+{% block title %}Add an event{% endblock %}
+
+{% block body %}
+    <h1>Add an event</h1>
+    <div class="flex-container">
+        {{ form_start(eventForm) }}
+        {{ form_widget(eventForm) }}
+        <button type="submit" class="btn">Create</button>
+        <button type="submit" class="btn">Publish</button>
+        <button type="submit" class="btn">Cancel</button>
+        {{ form_end(eventForm) }}
+    </div>
+
+{% endblock %}
