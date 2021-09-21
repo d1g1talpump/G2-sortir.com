@@ -12,6 +12,11 @@
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <p> Here's a list of events </p>
+        <ul>
+            {% for event in allEvents %}
+                <li>{{ event.name }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
 {% endblock %}
