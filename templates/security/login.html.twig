@@ -3,6 +3,7 @@
 {% block title %}{{ parent() }} | Log in{% endblock %}
 
 {% block body %}
+
                 <form id="signin" method="post">
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

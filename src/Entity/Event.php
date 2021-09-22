@@ -21,21 +21,20 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150)
      * @Assert\NotBlank
-     * @Assert\Length(min="3", max="150")
+     * @Assert\Length(max=150)
+     * @ORM\Column(type="string", length=150)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="datetime + 3")
+     * @ORM\Column(type="datetime")
      * @Assert\GreaterThan("today")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\LessThan(propertyPath="startDate")
      */
     private $limitSubDate;
 
@@ -46,7 +45,6 @@ class Event
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min=2, max=100)
      */
     private $maxSub;
 
@@ -81,7 +79,6 @@ class Event
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min="1", max="24*7")
      */
     private $duration;
 
@@ -89,6 +86,7 @@ class Event
     {
         $this->users = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {

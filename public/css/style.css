@@ -1,17 +1,6 @@
 @font-face {
-    font-family: Vesper, sans-serif
-                 Vesper-LightMedium, sans-serif;
-
+    font-family: Vesper, sans-serif;
     src: url("/public/fonts/Vesper/Vesper-BoldMedium.otf") format("opentype");
-    src: url("/public/fonts/Vesper/Vesper-LightMedium.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Roobert-Regular, sans-serif
-                 Roobert-Medium, sans-serif;
-
-    src: url("/public/fonts/Roobert/Roobert-Regular.otf") format("opentype");
-    src: url("/public/fonts/Roobert/Roobert-Medium.otf") format("opentype");
 }
 
 a {
@@ -27,10 +16,10 @@ a:hover{
 
 body{
     min-height: 100%;
-    font-family: Roobert-Regular, sans-serif;
 }
 
 button{
+
     background: transparent;
     border: none;
     outline:none;
@@ -41,11 +30,13 @@ button{
     font-family: Vesper-LightMedium, sans-serif;
     font-size: 20px;
 
+
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
     max-width: 50%;
     border-radius: 30px;
+
 
     cursor: pointer;
 
@@ -62,10 +53,6 @@ footer {
     height: 300px;
     width: 100%;
 
-}
-
-h1{
-    font-family: Vesper, sans-serif;
 }
 
 header img{
@@ -99,16 +86,8 @@ nav li{
 
 /* id */
 
-#modalRegisterForm{
-    visibility: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    z-index: 1000;
-}
+
+
 
 #modalRegisterForm div{
     width:350px;
@@ -140,7 +119,9 @@ nav li{
 }
 
 
+
 /* class */
+
 
 .checkbox-rmmbr{
     display: flex;
@@ -157,6 +138,7 @@ nav li{
     bottom:0;
 }
 
+
 .flash{
     padding:20px;
     font-weight: bold;
@@ -167,13 +149,6 @@ nav li{
 
 .flash-success{
     background-color: #88B04B;
-}
-
-.form-control{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 50%;
 }
 
 .headmess{
@@ -188,6 +163,7 @@ nav li{
     display: block;
     width: 50%;
 }
+
 
 .register-field{
     display: flex;
@@ -218,6 +194,18 @@ nav li{
 
 }
 
+
+.mainlog{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    width: 150px;
+    max-width: 50%;
+    border-radius: 30px;
+}
+
 /*///////*/
 .flex-container{
     width: 80%;
@@ -237,8 +225,32 @@ input, textarea, select{
     max-width: 50%;
 }
 
-
-
 button{
     margin: 1.5% 0;
 }
+
+
+/*TODO border between columns*/
+.eventTables {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.eventTables td, .eventTables th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.eventTables tr:nth-child(even){background-color: #f2f2f2;}
+
+.eventTables tr:hover {background-color: #ddd;}
+
+.eventTables th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #00ff00;
+    color: white;
+}
+
