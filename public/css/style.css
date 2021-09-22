@@ -17,6 +17,7 @@
 a {
     color: inherit;
     text-decoration: none;
+    cursor: pointer;
 
 }
 
@@ -30,6 +31,15 @@ body{
 }
 
 button{
+    background: transparent;
+    border: none;
+    outline:none;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+    font-family: Vesper-LightMedium, sans-serif;
+    font-size: 20px;
 
     margin-bottom: 1rem;
     box-sizing: border-box;
@@ -37,14 +47,21 @@ button{
     max-width: 50%;
     border-radius: 30px;
 
+    cursor: pointer;
+
 }
 
 footer {
-    clear: both;
+    /*clear: both;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    padding-top: 80px;*/
+
+    position: relative;
+    height: 300px;
+    width: 100%;
+
 }
 
 h1{
@@ -82,12 +99,38 @@ nav li{
 
 /* id */
 
-#rmmbrMe{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
+#modalRegisterForm{
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
 }
 
+#modalRegisterForm div{
+    width:350px;
+    height: 80px;
+    margin: 100px auto;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius:  10px;
+    border:1px solid #666666;
+    padding:15px;
+    text-align:center;
+    font-weight: bold;
+    font-size: 15px;
+    border: 3px solid #cccccc;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
 
 #signInTxt{
     display: flex;
@@ -101,8 +144,17 @@ nav li{
 
 .checkbox-rmmbr{
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    padding-left: 100px;
+}
+
+.copyright{
+    position: absolute;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    bottom:0;
 }
 
 .flash{
@@ -137,30 +189,19 @@ nav li{
     width: 50%;
 }
 
-.mainlog{
-    background: transparent;
-    border: none;
-    outline:none;
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-    -4px -4px 6px 0 rgba(116, 125, 136, .2),
-    inset -4px -4px 6px 0 rgba(255,255,255,.2),
-    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
-    font-family: Vesper-LightMedium, sans-serif;
-    font-size: 20px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 1rem;
-    box-sizing: border-box;
-    width: 150px;
-    max-width: 50%;
-    border-radius: 30px;
+.register-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .register-forgot{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 .signin-btn{

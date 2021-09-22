@@ -27,8 +27,8 @@
                     >
 
                     <div class="checkbox-rmmbr">
-                        <label id="rmmbrMe">Remember Me
-                            <input type="checkbox" name="_remember_me">
+                        <label>Remember Me
+                            <input id="rememberMe" type="checkbox" name="_remember_me">
                         </label>
                     </div>
 
@@ -38,8 +38,25 @@
                     </button>
                 </form>
                 <div class="register-forgot">
-                <a href="{{ path('profile_manage') }}">New User?</a>
-                <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
+                    <a href="{{ path('profile_manage') }}" onclick=modalRegister()>New User?</a>
+                    <div id="modalRegisterForm">
+                        <div>
+                            <h1>Register</h1>
+
+                            {#  {{ form_start(manageProfileForm) }}
+                            {{ form_widget(manageProfileForm) }}#}
+                            <div>
+                                <p style="background-color: #88B04B">My Photo {# TODO upload photo function #}</p>
+                            </div>
+
+                            <button type="submit" class="btn">Register</button>
+                            <button type="button" class="btn">
+                                <a href="{{ path('main_home') }}" onclick=modalRegister()>Cancel</a>
+                            </button>
+                            {#  {{ form_end(manageProfileForm) }} #}
+                        </div>
+                    </div>
+                    <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
                 </div>
 
 
