@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,24 @@ class EventRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Event::class);
+    }
+
+    public function allEventsHomePage()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $dql = "select e.name,
+                       e.startDate,
+                       e.limitSubDate,
+                       e.maxSub,
+                       s.label,
+                       u.pseudo       
+                from App\Entity\Event e 
+                join App\Entity\Status s WITH s.id = e.status
+                join App\Entity\User u WITH u.id = e.organiser";
+
+        $query = $entityManager->createQuery($dql);
+        return $query->getResult();
     }
 
     // /**
