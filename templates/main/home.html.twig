@@ -8,6 +8,7 @@
             <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
         </a>
         <h1 class="headmess"> Wanna Go Out ? </h1>
+        <button class="mainlog" name="LogIn/Register"><a href="{{ path('app_login') }}">LogIn/Register</a></button>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <p> Here's a list of events </p>
@@ -31,17 +32,7 @@
                         <td>{{ event.label }}</td>
                         <td></td>
                         <td>{{ event.pseudo }}</td>
-                        <td>
-                            {% if app.user.pseudo != event.pseudo %}
-                                <a href="{{ path('main_home') }}">Subscribe</a>
-                                {% for user in event.users %}
-                                    <a href="#">Unsubscribe</a>
-                                {% endfor %}
-                            {% else %}
-                                <a href="#">Modifier</a>
-                                <a href="#">Annuler</a>
-                            {% endif %}
-                        </td>
+                        <td></td>
                     </tr>
                 {% endfor %}
         </table>

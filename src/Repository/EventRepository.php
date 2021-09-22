@@ -31,11 +31,8 @@ class EventRepository extends ServiceEntityRepository
                        s.label,
                        u.pseudo       
                 from App\Entity\Event e 
-
                 join App\Entity\Status s WITH s.id = e.status
-                join App\Entity\User u WITH u.id = e.organiser
-                where s.id = 2";
-
+                join App\Entity\User u WITH u.id = e.organiser";
 
         $query = $entityManager->createQuery($dql);
         return $query->getResult();
