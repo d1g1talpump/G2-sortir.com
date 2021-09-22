@@ -25,15 +25,16 @@
         {{ form_label(eventForm.infos) }}
         {{ form_widget(eventForm.infos) }}
 
-        {{ form_label(eventForm.place) }}
-        {{ form_widget(eventForm.place) }}
-
         <div class=".label">
             Campus
         </div>
         <div class=".input">
             {{ app.user.campus.name }}
         </div>
+
+        {{ form_label(eventForm.city) }}
+        {{ form_widget(eventForm.city) }}
+
 
         {{ form_end(eventForm) }}
 
