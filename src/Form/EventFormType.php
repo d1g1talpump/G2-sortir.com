@@ -59,12 +59,12 @@ class EventFormType extends AbstractType
 
                 //Je peux rajouter une requete pour trier la façon dont je vais afficher.
 
-                'query_builder'=>function(EntityRepository $repo) {
+                /*'query_builder'=>function(EntityRepository $repo) {
 
                     return $repo->createQueryBuilder('p')
                         ->andWhere('p.city = 1')
                         ->addOrderBy('p.name','ASC');
-                }
+                }*/
             ])
 
             ->add('createEvent', SubmitType::class)
