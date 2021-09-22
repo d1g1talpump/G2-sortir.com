@@ -126,6 +126,7 @@ button{
     margin: 1.5% 0;
 }
 
+
 /*TODO border between columns*/
 .eventTables {
     font-family: Arial, Helvetica, sans-serif;
@@ -149,3 +150,4 @@ button{
     background-color: #00ff00;
     color: white;
 }
+
