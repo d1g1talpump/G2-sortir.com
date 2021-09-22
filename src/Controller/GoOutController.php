@@ -6,6 +6,7 @@ use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
+use App\Services\SwearWordCensor;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,11 @@ class GoOutController extends AbstractController
     /**
      * @Route("/add", name="add")
      */
-    public function addEvent(Request $request, EntityManagerInterface $entityManager): Response
+    public function addEvent(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SwearWordCensor $swearWordCensor
+    ): Response
     {
         $event = new Event();
         $status = new Status();
@@ -43,6 +48,12 @@ class GoOutController extends AbstractController
                 $status = $entityManager->find(Status::class, 2);
             }
             $event->setStatus($status);
+
+            $purifyString = $swearWordCensor->purify($event->getName());
+            $event->setName($purifyString);
+            $purifyString = $swearWordCensor->purify($event->getInfos());
+            $event->setInfos($purifyString);
+
             $entityManager->persist($event);
             $entityManager->flush();
 
