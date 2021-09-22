@@ -12,6 +12,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
+
     public function home(
         EventRepository $eventRepository
     ): Response
@@ -19,9 +20,8 @@ class MainController extends AbstractController
         $allEvents = $eventRepository->allEventsHomePage();
         dump($allEvents);
 
-        return $this->render('main/home.html.twig', [
-            "allEvents" => $allEvents
-        ]);
+          
+        return $this->render('main/home.html.twig', ["allEvents" => $allEvents]);
     }
 
 }
