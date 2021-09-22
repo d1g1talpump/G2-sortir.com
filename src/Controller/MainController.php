@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Repository\EventRepository;
 use http\Client\Curl\User;
 use Monolog\Handler\Handler;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,19 +22,15 @@ class MainController extends AbstractController
     ): Response
     {
         $allEvents = $eventRepository->allEventsHomePage();
-        dump($allEvents);
+        $eventsCurrentUser = null;
 
-          
-        return $this->render('main/home.html.twig', ["allEvents" => $allEvents]);
-    }
+        if($this->getUser() != null){
+            $eventsCurrentUser = $this->getUser()->getEvent();
+        }
 
-    /**
-    public function subscribe(EventRepository $eventRepository, HandleRequest $user, Event $event){
-        $event = $this->addUSer($user);
-
-        return $this->render('main/home.html.twig',[
-            "event" => $event
+        return $this->render('main/home.html.twig', [
+            "allEvents" => $allEvents,
+            "eventsCurrentUser" => $eventsCurrentUser,
         ]);
     }
-     **/
 }

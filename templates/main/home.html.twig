@@ -32,11 +32,27 @@
                         <td></td>
                         <td>{{ event.pseudo }}</td>
                         <td>
+                            {# Check if the current user is the organiser #}
                             {% if app.user.pseudo != event.pseudo %}
-                                <a href="{{ path('main_home') }}">Subscribe</a>
-                                {% for user in event.users %}
-                                    <a href="#">Unsubscribe</a>
-                                {% endfor %}
+
+                                {# if not, check if the current participate to one event at least #}
+                                {% if eventsCurrentUser|length != 0 %}
+
+                                    {# if it's true, check for all event if the current user is participate,
+                                        and add a subscribe or unsubscribe button or not #}
+
+                                    {% for eventUser in eventsCurrentUser %}
+                                        {% if event.id != eventUser.id %}
+                                            <a href="#">Unsubscribe</a>
+                                        {% else %}
+                                            <a href="#">Subscribe</a>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                {# Add subscribe button everywhere if current user aren't participate to any event #}
+                                {% else %}
+                                    <a href="#">Subscribe</a>
+                                {% endif %}
                             {% else %}
                                 <a href="#">Modifier</a>
                                 <a href="#">Annuler</a>
