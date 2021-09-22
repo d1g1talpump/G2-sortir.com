@@ -1,6 +1,7 @@
 @font-face {
-    font-family: Vesper, sans-serif;
+    font-family: Vesper, sans-serif, Vesper-LightMedium, sans-serif;
     src: url("/public/fonts/Vesper/Vesper-BoldMedium.otf") format("opentype");
+    src: url("/public/fonts/Vesper/Vesper-LightMedium.otf") format("opentype");
 }
 
 a {
