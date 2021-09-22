@@ -1,17 +1,6 @@
 @font-face {
-    font-family: Vesper, sans-serif
-                 Vesper-LightMedium, sans-serif;
-
+    font-family: Vesper, sans-serif;
     src: url("/public/fonts/Vesper/Vesper-BoldMedium.otf") format("opentype");
-    src: url("/public/fonts/Vesper/Vesper-LightMedium.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Roobert-Regular, sans-serif
-                 Roobert-Medium, sans-serif;
-
-    src: url("/public/fonts/Roobert/Roobert-Regular.otf") format("opentype");
-    src: url("/public/fonts/Roobert/Roobert-Medium.otf") format("opentype");
 }
 
 a {
@@ -26,17 +15,14 @@ a:hover{
 
 body{
     min-height: 100%;
-    font-family: Roobert-Regular, sans-serif;
 }
 
 button{
-
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
     max-width: 50%;
     border-radius: 30px;
-
 }
 
 footer {
@@ -45,10 +31,6 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-
-h1{
-    font-family: Vesper, sans-serif;
 }
 
 header img{
@@ -82,28 +64,9 @@ nav li{
 
 /* id */
 
-#rmmbrMe{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-
-#signInTxt{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Vesper,sans-serif;
-}
 
 
 /* class */
-
-.checkbox-rmmbr{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .flash{
     padding:20px;
@@ -115,13 +78,6 @@ nav li{
 
 .flash-success{
     background-color: #88B04B;
-}
-
-.form-control{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 50%;
 }
 
 .headmess{
@@ -138,15 +94,6 @@ nav li{
 }
 
 .mainlog{
-    background: transparent;
-    border: none;
-    outline:none;
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-    -4px -4px 6px 0 rgba(116, 125, 136, .2),
-    inset -4px -4px 6px 0 rgba(255,255,255,.2),
-    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
-    font-family: Vesper-LightMedium, sans-serif;
-    font-size: 20px;
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -156,27 +103,6 @@ nav li{
     max-width: 50%;
     border-radius: 30px;
 }
-
-.register-forgot{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.signin-btn{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-
-.signin-lbl{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-
 /*///////*/
 .flex-container{
     width: 80%;

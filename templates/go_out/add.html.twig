@@ -6,8 +6,8 @@
     <h1>Add an event</h1>
     <div class="flex-container">
         {{ form_start(eventForm) }}
-        {{ form_label(eventForm.name) }}
-        {{ form_widget(eventForm.name) }}
+            {{ form_label(eventForm.name) }}
+            {{ form_widget(eventForm.name) }}
 
         {{ form_label(eventForm.startDate) }}
         {{ form_widget(eventForm.startDate) }}
@@ -24,12 +24,6 @@
         {{ form_label(eventForm.infos) }}
         {{ form_widget(eventForm.infos) }}
 
-        {{ form_label(eventForm.place) }}
-        {{ form_widget(eventForm.place) }}
-
-        {{ form_label(eventForm.status) }}
-        {{ form_widget(eventForm.status) }}
-
         <div class=".label">
             Campus
         </div>
@@ -38,10 +32,12 @@
         </div>
 
         <button type="submit" class="btn">Confirm</button>
+        <button type="reset" class="btn">Cancel</button>
 
         {{ form_end(eventForm) }}
 
-        <button class="btn"><a href="{{ path('main_home') }}">Cancel</a></button>
+
+
     </div>
 
 {% endblock %}
