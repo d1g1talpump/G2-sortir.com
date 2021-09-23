@@ -10,9 +10,9 @@
 
 {% block title %}
     {% if app.user %}
-        Edit
+        {{ parent() }} | Edit
     {% else %}
-        Register
+        {{ parent() }} | Register
     {% endif %}
 {% endblock %}
 

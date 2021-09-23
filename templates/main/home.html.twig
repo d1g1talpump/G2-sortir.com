@@ -8,28 +8,32 @@
             <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
         </a>
         <h1 class="headmess"> Wanna Go Out ? </h1>
+        <button class="mainlog" name="LogIn/Register"><a href="{{ path('app_login') }}">LogIn/Register</a></button>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <p> Here's a list of events </p>
         <table class="eventTables">
-                <tr>
-                    <th>Outing Name</th>
-                    <th>Date of outing</th>
-                    <th>Subscription Closure Date</th>
-                    <th>subscribed / available places</th>
-                    <th>Status</th>
-                    <th>Subscribed</th>
-                    <th>Organiser</th>
-                    <th>Actions</th>
-                </tr>
-                {% for event in allEvents %}
-                    <tr>
+            <tr>
+                <th>Outing Name</th>
+                <th>Date of outing</th>
+                <th>Subscription Closure Date</th>
+                <th>subscribed / available places</th>
+                <th>Status</th>
+                <th>Subscribed</th>
+                <th>Organiser</th>
+                <th>Actions</th>
+            </tr>
+            {% for event in allEvents %}
+                    <tr onclick="window.location.href=`{{ path('goOut_details', {'id': event.id})}}`">
                         <td>{{ event.name }}</td>
-                        <td>{{ event.startDate|date('d/m/Y h:m') }}</td>
-                        <td>{{ event.limitSubDate|date('d/m/Y') }}</td>
+                        <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
+                        <td>{{ event.limitSubDate|date('d/m/Y h:i') }}</td>
                         <td> * / {{ event.maxSub }}</td>
-                        <td>{{ event.label }}</td>
+                        <td>{{ event.status.label }}</td>
                         <td></td>
+                        <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
+                        <td></td>
+
                         <td>{{ event.pseudo }}</td>
                         <td>
                             {# Check if the current user is the organiser #}
@@ -54,8 +58,9 @@
                                 <a href="#">Annuler</a>
                             {% endif %}
                         </td>
+
                     </tr>
-                {% endfor %}
+            {% endfor %}
         </table>
     {% endif %}
 
