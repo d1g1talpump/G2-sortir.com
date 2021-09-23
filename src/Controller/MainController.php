@@ -16,7 +16,7 @@ class MainController extends AbstractController
      */
     public function home(EventRepository $eventRepository): Response
     {
-        $allEvents = $eventRepository->findAll();
+        $allEvents = $eventRepository->allEventsPublish();
         $eventsCurrentUser = null;
 
         //Get all events subscribed by current user
@@ -24,9 +24,9 @@ class MainController extends AbstractController
             $eventsCurrentUser = $this->getUser()->getEvent();
         }
 
-        $user = $this->getUser();
-        dump($user);
 
+        dump($this->getUser());
+        dump($eventsCurrentUser);
         return $this->render('main/home.html.twig', [
             "allEvents" => $allEvents,
             "eventsCurrentUser" => $eventsCurrentUser,
