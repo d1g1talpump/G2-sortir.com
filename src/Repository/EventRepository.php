@@ -21,24 +21,15 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function allEventsHomePage()
+    public function allEventsPublish()
     {
-        $entityManager = $this->getEntityManager();
+        $queryBuilder = $this->createQueryBuilder('e')
 
-        $dql = "select e.name,
-                       e.startDate,
-                       e.limitSubDate,
-                       e.maxSub,
-                       e.id,
-                       s.label,
-                       u.pseudo       
-                from App\Entity\Event e 
-                join App\Entity\Status s WITH s.id = e.status
-                join App\Entity\User u WITH u.id = e.organiser";
-
-        $query = $entityManager->createQuery($dql);
+            ->andWhere('e.status = 2');
+        $query = $queryBuilder->getQuery();
         return $query->getResult();
     }
+
 
 
     public function subscribedUsers()

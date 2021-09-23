@@ -70,7 +70,7 @@ class User implements UserInterface
     private $campus;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Event::class, inversedBy="users", fetch="EAGER")
      */
     private $event;
 
