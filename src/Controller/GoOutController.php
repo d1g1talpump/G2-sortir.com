@@ -9,6 +9,7 @@ use App\Form\EventFormType;
 use App\Repository\EventRepository;
 use App\Services\SwearWordCensor;
 use Doctrine\ORM\EntityManager;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +25,12 @@ class GoOutController extends AbstractController
      * @Route("/add", name="add")
      */
     public function addEvent(
+
         Request                $request,
         EntityManagerInterface $entityManager,
         SwearWordCensor        $swearWordCensor
     ): Response
+
     {
         $event = new Event();
         $status = new Status();
