@@ -7,10 +7,9 @@ use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
 use App\Repository\EventRepository;
-
 use App\Services\SwearWordCensor;
-
 use Doctrine\ORM\EntityManager;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +25,12 @@ class GoOutController extends AbstractController
      * @Route("/add", name="add")
      */
     public function addEvent(
+
         Request                $request,
         EntityManagerInterface $entityManager,
         SwearWordCensor        $swearWordCensor
     ): Response
+
     {
         $event = new Event();
         $status = new Status();
@@ -71,17 +72,24 @@ class GoOutController extends AbstractController
     /**
      * @Route("/details/{id}", name="details")
      */
-    public function detailsEvent(
-        int                    $id,
-        EventRepository        $eventRepository,
-        EntityManagerInterface $entityManager
-    ): Response
+    public function detailsEvent(int $id, EventRepository $eventRepository): Response
+    {
+        $event = $eventRepository->find($id);
+
+        return $this->render('go_out/details.html.twig', [
+            "event" => $event
+        ]);
+    }
+
+    /**
+     * @Route ("/participate_event/{id}", name="participate")
+     */
+    public function participate($id, EventRepository $eventRepository, EntityManagerInterface $entityManager): Response
     {
         $event = $eventRepository->find($id);
         $currentUser = $this->getUser();
 
         $currentUser->addEvent($event);
-        $event->addUser($currentUser);
 
         $entityManager->persist($event);
         $entityManager->flush();

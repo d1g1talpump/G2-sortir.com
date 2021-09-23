@@ -44,11 +44,11 @@
                                         {% if event.id != eventUser.id %}
                                             <a href="#">Unsubscribe</a>
                                         {% else %}
-                                            <a href="{{ path('goOut_details', {'id': event.id}) }}">Subscribe</a>
+                                            <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
                                         {% endif %}
                                     {% endfor %}
                                 {% else %}
-                                    <a href="{{ path('goOut_details', {'id': event.id}) }}">Subscribe</a>
+                                    <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
                                 {% endif %}
                             {% else %}
                                 <a href="#">Modifier</a>

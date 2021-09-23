@@ -4,8 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -39,22 +40,16 @@ class EventRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
+
+    public function subscribedUsers()
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('e')
+                             ->leftJoin('e.users', 'u')
+                             ->addSelect('u');
+        $query = $queryBuilder->getQuery();
+        return new Paginator($query);
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Event
