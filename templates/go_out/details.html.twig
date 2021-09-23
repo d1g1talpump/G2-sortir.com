@@ -3,6 +3,12 @@
 {% block body %}
     <h1>Event details</h1>
     <div>
+        <span>Organiser Name: {{ event.organiser.firstname }} {{ event.organiser.lastname }}</span>
+    </div>
+    <div>
+        <span>Organiser Pseudo: {{ event.organiser.pseudo }}</span>
+    </div>
+    <div>
         <span>Event Name : {{ event.name }}</span>
     </div>
     <div>
@@ -37,6 +43,21 @@
     </div>
     <div>
         <span>Longitude : {{ event.place.longitude }}</span>
+    </div>
+
+    <div>
+        {# TODO get list of participant for the table and add clickable link to participant profile #}
+        <span>People coming to the event:</span>
+        <table class="participantList">
+            <tr>
+                <th>Pseudo</th>
+                <th>Name</th>
+            </tr>
+            <tr>
+                <td>poopooman</td>
+                <td>Alex</td>
+            </tr>
+        </table>
     </div>
 {% endblock %}
 

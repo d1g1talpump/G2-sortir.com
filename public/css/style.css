@@ -128,22 +128,24 @@ button{
 
 
 /*TODO border between columns*/
-.eventTables {
+.eventTables, .participantList {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-.eventTables td, .eventTables th {
+.eventTables td, .eventTables th, .participantList td, .participantList th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
 .eventTables tr:nth-child(even){background-color: #f2f2f2;}
+.participantList tr:nth-child(even){background-color: #f2f2f2;}
 
 .eventTables tr:hover {background-color: #ddd;}
+.participantList tr:hover {background-color: #ddd;}
 
-.eventTables th {
+.eventTables th, .participantList th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

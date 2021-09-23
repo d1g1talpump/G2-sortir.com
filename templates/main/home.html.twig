@@ -31,7 +31,7 @@
                         <td> * / {{ event.maxSub }}</td>
                         <td>{{ event.status.label }}</td>
                         <td></td>
-                        <td>{{ event.organiser.pseudo }}</td>
+                        <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
                         <td></td>
                     </tr>
             {% endfor %}
