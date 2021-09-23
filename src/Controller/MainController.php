@@ -2,22 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Event;
+
 use App\Repository\EventRepository;
 
-
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\User;
-
-use http\Client\Curl\User;
-use Monolog\Handler\Handler;
-use phpDocumentor\Reflection\Types\Boolean;
-
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\User;
-use http\Client\Curl\User;
-use Monolog\Handler\Handler;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
