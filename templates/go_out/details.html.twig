@@ -1,3 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | details{% endblock %}
+{% block body %}
+    <h1>Event details</h1>
+    <div>
+        <span>Organiser Name: {{ event.organiser.firstname }} {{ event.organiser.lastname }}</span>
+    </div>
+    <div>
+        <span>Organiser Pseudo: {{ event.organiser.pseudo }}</span>
+    </div>
+    <div>
+        <span>Event Name : {{ event.name }}</span>
+    </div>
+    <div>
+        <span>Time and Date of Event : {{ event.startDate|date('D d/m/Y H:i') }}</span>
+    </div>
+    <div>
+        <span>Subscription Closure Date : {{ event.limitSubDate|date('d/m/Y h:i') }}</span>
+    </div>
+    <div>
+        <span>Number of places : {{ event.maxSub }}</span>
+    </div>
+    <div>
+        <span>Duration : {{ event.duration }} minutes</span>
+    </div>
+    <div>
+        <span>Description and info : {{ event.infos }}</span>
+    </div>
+    <div>
+        <span>Campus : {{ event.campus.name }} </span>
+    </div>
+    <div>
+        <span>Place : {{ event.place.name }}</span>
+    </div>
+    <div>
+        <span>Street : {{ event.place.street }}</span>
+    </div>
+    <div>
+        <span>Post Code : {{ event.place.city.postalCode }}</span>
+    </div>
+    <div>
+        <span>Latitude : {{ event.place.latitude }}</span>
+    </div>
+    <div>
+        <span>Longitude : {{ event.place.longitude }}</span>
+    </div>
+
+    <div>
+        {# TODO get list of participant for the table and add clickable link to participant profile #}
+        <span>People coming to the event:</span>
+        <table class="participantList">
+            <tr>
+                <th>Pseudo</th>
+                <th>Name</th>
+            </tr>
+            <tr>
+                <td>poopooman</td>
+                <td>Alex</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+
+{% block title %}{{ parent() }} | Event details{% endblock %}

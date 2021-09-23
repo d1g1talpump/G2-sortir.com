@@ -21,7 +21,7 @@ class ProfileController extends AbstractController
     /**
      * @Route("/manage", name="manage")
      */
-    public function register(
+    public function manage(
         Request                      $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler    $guardHandler,
@@ -70,10 +70,14 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route ("/view", name="view")
+     * @Route ("/view/{id}", name="view")
      */
-    public function viewProfile(): Response
+    public function viewProfile(int $id, UserRepository $userRepository): Response
     {
-        return $this->render('profile/viewProfile.html.twig');
+        $user = $userRepository->find($id);
+
+        return $this->render('profile/viewProfile.html.twig', [
+            'selectedUser' => $user,
+        ]);
     }
 }
