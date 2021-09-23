@@ -21,17 +21,6 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function allEventsPublish()
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-
-            ->andWhere('e.status = 2');
-        $query = $queryBuilder->getQuery();
-        return $query->getResult();
-    }
-
-
-
     public function subscribedUsers()
     {
         $queryBuilder = $this->createQueryBuilder('e')
