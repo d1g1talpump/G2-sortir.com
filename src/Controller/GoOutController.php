@@ -6,7 +6,7 @@ use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
-use Doctrine\ORM\EntityManager;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,9 @@ class GoOutController extends AbstractController
     /**
      * @Route("/add", name="add")
      */
-    public function addEvent(Request $request, EntityManagerInterface $entityManager): Response
+    public function addEvent(
+                             Request $request,
+                             EntityManagerInterface $entityManager): Response
     {
         $event = new Event();
         $status = new Status();
@@ -64,4 +66,5 @@ class GoOutController extends AbstractController
     {
         return $this->render('go_out/details.html.twig');
     }
+
 }
