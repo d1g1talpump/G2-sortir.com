@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}{{ parent() }} | Reset your password{% endblock %}
 
 {% block body %}
     {% for flashError in app.flashes('reset_password_error') %}

@@ -6,6 +6,7 @@ use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
+use App\Repository\EventRepository;
 use App\Services\SwearWordCensor;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,16 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route ("/go", name="goOut_")
  */
-
 class GoOutController extends AbstractController
 {
     /**
      * @Route("/add", name="add")
      */
     public function addEvent(
-        Request $request,
+        Request                $request,
         EntityManagerInterface $entityManager,
-        SwearWordCensor $swearWordCensor
+        SwearWordCensor        $swearWordCensor
     ): Response
     {
         $event = new Event();
@@ -40,11 +40,10 @@ class GoOutController extends AbstractController
 
         $eventForm->handleRequest($request);
 
-        if($eventForm->isSubmitted() && $eventForm->isValid()){
-            if($eventForm->get("createEvent")->isClicked()){
+        if ($eventForm->isSubmitted() && $eventForm->isValid()) {
+            if ($eventForm->get("createEvent")->isClicked()) {
                 $status = $entityManager->find(Status::class, 1);
-            }
-            elseif ($eventForm->get("publishEvent")->isClicked()){
+            } elseif ($eventForm->get("publishEvent")->isClicked()) {
                 $status = $entityManager->find(Status::class, 2);
             }
             $event->setStatus($status);
@@ -68,11 +67,14 @@ class GoOutController extends AbstractController
     }
 
     /**
-     * @return Response
-     * @Route("/details", name="details")
+     * @Route("/details/{id}", name="details")
      */
-    public function detailsEvent(): Response
+    public function detailsEvent(int $id, EventRepository $eventRepository): Response
     {
-        return $this->render('go_out/details.html.twig');
+        $event = $eventRepository->find($id);
+
+        return $this->render('go_out/details.html.twig', [
+            "event" => $event
+        ]);
     }
 }
