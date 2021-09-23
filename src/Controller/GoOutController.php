@@ -6,11 +6,8 @@ use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
-
 use App\Repository\EventRepository;
-
 use App\Services\SwearWordCensor;
-
 use Doctrine\ORM\EntityManager;
 
 use Doctrine\ORM\EntityManagerInterface;
