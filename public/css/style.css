@@ -1,12 +1,6 @@
 @font-face {
-    font-family: Vesper, sans-serif, Vesper-LightMedium, sans-serif;
+    font-family: Vesper, sans-serif;
     src: url("/public/fonts/Vesper/Vesper-BoldMedium.otf") format("opentype");
-    src: url("/public/fonts/Vesper/Vesper-LightMedium.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Roobert-Regular, sans-serif;
-    src: url("/public/fonts/Roobert/Roobert-Regular.otf") format("opentype");
 }
 
 a {
@@ -21,20 +15,9 @@ a:hover{
 
 body{
     min-height: 100%;
-    font-family: Roobert, sans-serif;
 }
 
 button{
-    background: transparent;
-    border: none;
-    outline:none;
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-    -4px -4px 6px 0 rgba(116, 125, 136, .2),
-    inset -4px -4px 6px 0 rgba(255,255,255,.2),
-    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
-    font-family: Vesper-LightMedium, sans-serif;
-    font-size: 20px;
-
     margin-bottom: 1rem;
     box-sizing: border-box;
     width: 150px;
@@ -44,13 +27,10 @@ button{
 
 footer {
     clear: both;
-    position: relative;
-    height: 300px;
-    width: 100%;
-}
-
-h1{
-    font-family: Vesper, sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 header img{
@@ -84,31 +64,9 @@ nav li{
 
 /* id */
 
-#copyright{
-    position: absolute;
-    width: 100%;
-    line-height: 40px;
-    text-align: center;
-    bottom:0;
-}
 
-#signInTxt{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Vesper,sans-serif;
-}
 
 /* class */
-
-.checkbox-rmmbr{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-left: 100px;
-}
-
-
 
 .flash{
     padding:20px;
@@ -120,13 +78,6 @@ nav li{
 
 .flash-success{
     background-color: #88B04B;
-}
-
-.form-control{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 50%;
 }
 
 .headmess{
@@ -151,36 +102,6 @@ nav li{
     width: 150px;
     max-width: 50%;
     border-radius: 30px;
-}
-
-+.register-field{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.register-forgot{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.signin-btn{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 50%;
-}
-
-
-.signin-lbl{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
 }
 /*///////*/
 .flex-container{
