@@ -69,23 +69,14 @@ class GoOutController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/details/{id}", name="details")
      */
-    public function detailsEvent(int $id, EventRepository $eventRepository): Response
+    public function detailsEvent(
+        int                    $id,
+        EventRepository        $eventRepository,
+        EntityManagerInterface $entityManager
+    ): Response
     {
-        $event = $eventRepository->find($id);
-
-        return $this->render('go_out/details.html.twig', [
-            "event" => $event
-        ]);
-    }
-
-
-    /**
-     * @Route ("/participate_event/{id}", name="participate")
-     */
-    public function participate ($id, EventRepository $eventRepository, EntityManagerInterface $entityManager): Response{
         $event = $eventRepository->find($id);
         $currentUser = $this->getUser();
 
@@ -94,9 +85,6 @@ class GoOutController extends AbstractController
 
         $entityManager->persist($event);
         $entityManager->flush();
-        dump($event);
-        dump($currentUser);
-
 
         return $this->render('go_out/details.html.twig', [
             'event' => $event,
