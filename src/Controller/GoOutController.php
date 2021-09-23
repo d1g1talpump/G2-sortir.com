@@ -7,9 +7,7 @@ use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
 use App\Repository\EventRepository;
-
 use App\Services\SwearWordCensor;
-
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -90,4 +88,5 @@ class GoOutController extends AbstractController
             'event' => $event,
         ]);
     }
+
 }

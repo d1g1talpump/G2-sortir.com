@@ -67,7 +67,7 @@ class Event
     private $place;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="event")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="event", cascade={"persist"})
      */
     private $users;
 

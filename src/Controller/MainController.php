@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Repository\EventRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
 use http\Client\Curl\User;
 use Monolog\Handler\Handler;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -33,7 +35,5 @@ class MainController extends AbstractController
             "allEvents" => $allEvents,
             "eventsCurrentUser" => $eventsCurrentUser,
         ]);
-
-
     }
 }
