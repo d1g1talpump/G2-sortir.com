@@ -7,7 +7,9 @@ use App\Entity\User;
 use App\Entity\Event;
 use App\Form\EventFormType;
 use App\Repository\EventRepository;
+
 use App\Services\SwearWordCensor;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,6 +69,7 @@ class GoOutController extends AbstractController
     }
 
     /**
+     * @return Response
      * @Route("/details/{id}", name="details")
      */
     public function detailsEvent(int $id, EventRepository $eventRepository): Response
@@ -75,6 +78,28 @@ class GoOutController extends AbstractController
 
         return $this->render('go_out/details.html.twig', [
             "event" => $event
+        ]);
+    }
+
+
+    /**
+     * @Route ("/participate_event/{id}", name="participate")
+     */
+    public function participate ($id, EventRepository $eventRepository, EntityManagerInterface $entityManager): Response{
+        $event = $eventRepository->find($id);
+        $currentUser = $this->getUser();
+
+        $currentUser->addEvent($event);
+        $event->addUser($currentUser);
+
+        $entityManager->persist($event);
+        $entityManager->flush();
+        dump($event);
+        dump($currentUser);
+
+
+        return $this->render('go_out/details.html.twig', [
+            'event' => $event,
         ]);
     }
 }

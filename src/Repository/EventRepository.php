@@ -28,6 +28,7 @@ class EventRepository extends ServiceEntityRepository
                        e.startDate,
                        e.limitSubDate,
                        e.maxSub,
+                       e.id,
                        s.label,
                        u.pseudo       
                 from App\Entity\Event e 

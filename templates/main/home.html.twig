@@ -33,6 +33,32 @@
                         <td></td>
                         <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
                         <td></td>
+
+                        <td>{{ event.pseudo }}</td>
+                        <td>
+                            {# Check if the current user is the organiser #}
+                            {% if app.user.pseudo != event.pseudo %}
+
+                                {# if not, check if the current user participate to one event at least #}
+                                {% if eventsCurrentUser|length != 0 %}
+
+                                    {# if it's true, check for all events if the current user is participate#}
+                                    {% for eventUser in eventsCurrentUser %}
+                                        {% if event.id != eventUser.id %}
+                                            <a href="#">Unsubscribe</a>
+                                        {% else %}
+                                            <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
+                                {% endif %}
+                            {% else %}
+                                <a href="#">Modifier</a>
+                                <a href="#">Annuler</a>
+                            {% endif %}
+                        </td>
+
                     </tr>
             {% endfor %}
         </table>
