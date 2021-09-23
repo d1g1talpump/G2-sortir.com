@@ -14,11 +14,11 @@
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail">Email</label>
+        <h1 class="signin-lbl">Please sign in Mate</h1>
+        <label class="signin-lbl" for="inputEmail">Email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                autocomplete="email" required autofocus>
-        <label for="inputPassword">Password</label>
+        <label class="signin-lbl" for="inputPassword">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
                required>
 
@@ -26,18 +26,19 @@
                value="{{ csrf_token('authenticate') }}"
         >
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
+        <div class="checkbox-rmmbr">
+            <label> Remember me
+                <input type="checkbox" name="_remember_me">
             </label>
         </div>
 
 
-        <button class="btn btn-lg btn-primary" type="submit">
+        <button class="signin-btn" type="submit">
             Sign in
         </button>
     </form>
-
-    <a href="{{ path('profile_manage') }}">New User?</a>
-    <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
+    <div class="register-forgot">
+        <a href="{{ path('profile_manage') }}">New User?</a>
+        <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
+    </div>
 {% endblock %}
