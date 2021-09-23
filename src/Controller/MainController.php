@@ -16,8 +16,8 @@ class MainController extends AbstractController
         EventRepository $eventRepository
     ): Response
     {
-        $allEvents = $eventRepository->allEventsHomePage();
-        dump($allEvents);
+//        $allEvents = $eventRepository->allEventsHomePage();
+        $allEvents = $eventRepository->findAll();
 
         return $this->render('main/home.html.twig', [
             "allEvents" => $allEvents
