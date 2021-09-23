@@ -17,20 +17,24 @@ class MainController extends AbstractController
      * @Route("/", name="main_home")
      */
 
-    public function home(
-        EventRepository $eventRepository
-    ): Response
+    public function home(EventRepository $eventRepository): Response
     {
         $allEvents = $eventRepository->allEventsHomePage();
         $eventsCurrentUser = null;
 
+        //Get all events subscribed by current user
         if($this->getUser() != null){
             $eventsCurrentUser = $this->getUser()->getEvent();
         }
+
+        $user = $this->getUser();
+        dump($user);
 
         return $this->render('main/home.html.twig', [
             "allEvents" => $allEvents,
             "eventsCurrentUser" => $eventsCurrentUser,
         ]);
+
+
     }
 }
