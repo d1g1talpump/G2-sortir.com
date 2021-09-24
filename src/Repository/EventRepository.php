@@ -24,7 +24,6 @@ class EventRepository extends ServiceEntityRepository
     public function allEventsPublish()
     {
         $queryBuilder = $this->createQueryBuilder('e')
-
             ->andWhere('e.status = 2');
         $query = $queryBuilder->getQuery();
         return $query->getResult();

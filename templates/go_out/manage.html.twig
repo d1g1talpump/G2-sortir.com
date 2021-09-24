@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} | Add an event{% endblock %}
-
 {% block body %}
-    <h1>Add an event</h1>
+    {% if add %}
+        <h1>Add an event</h1>
+    {% else %}
+        <h1>Modify event</h1>
+    {% endif %}
+
     <div class="flex-container">
 
         {{ form_start(eventForm) }}
@@ -38,12 +41,18 @@
 
         {{ form_label(eventForm.place) }}
         {{ form_widget(eventForm.place) }}
-
-        {# <button type="submit" class="btn">Confirm</button> #}
-        {# <button type="reset" class="btn">Cancel</button> #}
-        {{ form_end(eventForm) }}
-
-        <a href="{{ path('main_home') }}">Back to home</a>
     </div>
 
+    {{ form_widget(eventForm.publishEvent) }}
+    {{ form_widget(eventForm.createEvent) }}
+
+    {{ form_end(eventForm) }}
+
+    <a href="{{ path('main_home') }}">Back to home</a>
+
 {% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
