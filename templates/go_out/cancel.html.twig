@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cancel Event</h1>
+    <div class="flex-container">
+        <div>
+            <span>Event Name : {{ event.name }}</span>
+        </div>
+        <div>
+            <span>Time and Date of Event : {{ event.startDate|date('D d/m/Y H:i') }}</span>
+        </div>
+        <div>
+            <span>Campus : {{ event.campus.name }} </span>
+        </div>
+        <div>
+            <span>Place : {{ event.place.name }}</span>
+        </div>
+
+        {{ form_start(cancelEventForm) }}
+        {{ form_widget(cancelEventForm, {'attr': {'value': ' '}}) }}
+        {{ form_end(cancelEventForm) }}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Cancel Event
+{% endblock %}
+

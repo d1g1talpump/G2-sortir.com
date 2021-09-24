@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -201,7 +202,7 @@ class Event
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addEvent($this);
+            $user->subscribeEvent($this);
         }
 
         return $this;
@@ -210,7 +211,7 @@ class Event
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeEvent($this);
+            $user->unsubscribeEvent($this);
         }
 
         return $this;
@@ -239,5 +240,5 @@ class Event
 
         return $this;
     }
-    
+
 }

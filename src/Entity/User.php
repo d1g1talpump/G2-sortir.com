@@ -252,7 +252,7 @@ class User implements UserInterface
         return $this->event;
     }
 
-    public function addEvent(Event $event): self
+    public function subscribeEvent(Event $event): self
     {
         if (!$this->event->contains($event)) {
             $this->event[] = $event;
@@ -261,7 +261,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeEvent(Event $event): self
+    public function unsubscribeEvent(Event $event): self
     {
         $this->event->removeElement($event);
 

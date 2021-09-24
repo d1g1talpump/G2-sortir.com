@@ -20,15 +20,18 @@ class EventFormType extends AbstractType
         $city = new City();
         $builder
             ->add('name')
-            ->add('startDate', DateTimeType::class, [
-                'widget' => 'single_text',
-                'input'  => 'datetime_immutable',
-                'required' => false,
-            ])
-            ->add('limitSubDate', DateTimeType::class, [
-                'widget' => 'single_text',
-                'input'  => 'datetime_immutable',
-            ])
+            ->add('startDate'
+                , DateTimeType::class, ['widget' => 'single_text',
+//                'input'  => 'datetime_immutable',
+//                'required' => false,
+                ]
+            )
+            ->add('limitSubDate',
+                DateTimeType::class
+                , ['widget' => 'single_text',
+//                'input'  => 'datetime_immutable',
+                ]
+            )
             ->add('maxSub')
             ->add('duration')
             ->add('infos')
@@ -37,12 +40,16 @@ class EventFormType extends AbstractType
                 'class' => City::class,
                 'choice_label' => 'name'
             ])
-            ->add('place',EntityType::class,[
-                'class'=>Place::class,
-                'choice_label'=>'name'
+            ->add('place', EntityType::class, [
+                'class' => Place::class,
+                'choice_label' => 'name'
             ])
-            ->add('createEvent', SubmitType::class)
-            ->add('publishEvent', SubmitType::class);
+            ->add('createEvent', SubmitType::class, [
+                'label' => 'Save For Later',
+            ])
+            ->add('publishEvent', SubmitType::class, [
+                'label' => 'Publish Now'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

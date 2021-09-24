@@ -16,7 +16,8 @@ class MainController extends AbstractController
      */
     public function home(EventRepository $eventRepository): Response
     {
-        $allEvents = $eventRepository->allEventsPublish();
+//        $allEvents = $eventRepository->allEventsPublish();
+        $allEvents = $eventRepository->findAll();
         $eventsCurrentUser = null;
 
         //Get all events subscribed by current user

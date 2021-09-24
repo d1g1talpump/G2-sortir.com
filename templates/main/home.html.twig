@@ -23,29 +23,37 @@
                 <th>Actions</th>
             </tr>
             {% for event in allEvents %}
-                    <tr onclick="window.location.href=`{{ path('goOut_details', {'id': event.id})}}`">
-                        <td>{{ event.name }}</td>
-                        <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
-                        <td>{{ event.limitSubDate|date('d/m/Y h:i') }}</td>
-                        <td> * / {{ event.maxSub }}</td>
-                        <td>{{ event.status.label }}</td>
-                        <td></td>
-                        <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
-                        <td>
-                            {# Check if the current user is the organiser #}
-                            {% if app.user.pseudo != event.organiser.pseudo %}
-                                {% if event in eventsCurrentUser %}
-                                    <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Unsubscribe</a>
-                                {% else %}
-                                    <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
-                                {% endif %}
+                <tr onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`">
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
+                    <td>{{ event.limitSubDate|date('d/m/Y h:i') }}</td>
+                    <td> * / {{ event.maxSub }}</td>
+                    <td>{{ event.status.label }}</td>
+                    <td></td>
+                    <td>
+                        <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                    </td>
+                    <td>
+                        {# Check if the current user is the organiser #}
+                        {% if app.user.pseudo != event.organiser.pseudo %}
+                            {% if event in eventsCurrentUser %}
+                                <a href="{{ path('goOut_leave', {'id': event.id}) }}">Unsubscribe</a>
                             {% else %}
-                                <a href="#">Modifier</a>
-                                <a href="#">Annuler</a>
+                                <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
                             {% endif %}
-                        </td>
+                        {% else %}
+                            {% if event.status.id == 2 %}
+                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify</a>
+                                <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Cancel</a>
+                            {% elseif event.status.id == 6 %}
+                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and Republish</a>
+                            {% else %}
+                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Publish</a>
+                            {% endif %}
+                        {% endif %}
+                    </td>
 
-                    </tr>
+                </tr>
             {% endfor %}
         </table>
     {% endif %}
