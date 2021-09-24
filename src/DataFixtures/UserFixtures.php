@@ -5,11 +5,12 @@ namespace App\DataFixtures;
 use App\Entity\Campus;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     private UserPasswordEncoderInterface $encoder;
 
@@ -21,7 +22,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('en_CA');
-        for($i = 0; $i <=100; $i++){
+
+        for($i = 0; $i <=20; $i++){
 
             $user = new User();
             $hash = $this->encoder->encodePassword($user, 'password');
@@ -39,8 +41,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($user);
             $this->addReference(User::class.$i, $user);
         }
-        // $product = new Product();
-        // $manager->persist($product);
 
         $manager->flush();
     }
@@ -50,5 +50,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         return [
             CampusFixtures::class
         ];
+    }
+
+    public static function getGroups(): array
+    {
+        return [
+            'firstLoad', 'user', 'event'];
     }
 }
