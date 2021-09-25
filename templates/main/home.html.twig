@@ -27,9 +27,22 @@
                     <td>{{ event.name }}</td>
                     <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
                     <td>{{ event.limitSubDate|date('d/m/Y h:i') }}</td>
-                    <td> * / {{ event.maxSub }}</td>
+                    <td>
+                        {% for line in subsPerEvent %}
+                            {% for eventID, count in line %}
+                                {% if eventID == event.id %}
+                                    {{ count }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        / {{ event.maxSub }}</td>
                     <td>{{ event.status.label }}</td>
-                    <td></td>
+                    <td>
+                        {% if event in eventsCurrentUser %}
+                            *
+                        {% else %}
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
                     </td>
