@@ -21,10 +21,10 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function allEventsPublish()
+    public function allEventsForHomePage()
     {
         $queryBuilder = $this->createQueryBuilder('e')
-            ->andWhere('e.status = 2');
+            ->andWhere("e.status BETWEEN 1 AND 6");
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }
