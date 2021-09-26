@@ -11,10 +11,12 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ 'D:/wamp64/www/sortir.com/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/wamp64/www/sortir.com/templates/admin/dashboard.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
+        {% for user in allUsers %}
+            <li><a href="{{ path('profile_view', {'id': user.id}) }}">{{ user.id }} : {{ user.pseudo }}</a></li>
+        {% endfor %}
     </ul>
+
+
 </div>
 {% endblock %}

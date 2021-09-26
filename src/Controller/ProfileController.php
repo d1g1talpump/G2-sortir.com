@@ -80,4 +80,13 @@ class ProfileController extends AbstractController
             'selectedUser' => $user,
         ]);
     }
+
+    /**
+     * @Route ("/desactivate", name="desactivate")
+     */
+
+    public function desactivateProfile(): Response
+    {
+        //TODO finish this method
+    }
 }
