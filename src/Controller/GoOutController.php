@@ -44,23 +44,7 @@ class GoOutController extends AbstractController
         $eventForm->handleRequest($request);
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
-            if ($eventForm->get("createEvent")->isClicked()) {
-                $status = $entityManager->find(Status::class, 1);
-            } elseif ($eventForm->get("publishEvent")->isClicked()) {
-                $status = $entityManager->find(Status::class, 2);
-            }
-            $event->setStatus($status);
-
-            $purifyString = $swearWordCensor->purify($event->getName());
-            $event->setName($purifyString);
-            $purifyString = $swearWordCensor->purify($event->getInfos());
-            $event->setInfos($purifyString);
-
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Event added !');
-            return $this->redirectToRoute('main_home');
+            return $this->checkDataSendToDB($eventForm, $entityManager, $status, $event, $swearWordCensor);
         }
 
         return $this->render('go_out/manage.html.twig', [
@@ -82,29 +66,14 @@ class GoOutController extends AbstractController
     ): Response
     {
         $event = $eventRepository->find($id);
+        $status = $event->getStatus();
 
         $eventForm = $this->createForm(EventFormType::class, $event);
 
         $eventForm->handleRequest($request);
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
-            if ($eventForm->get("createEvent")->isClicked()) {
-                $status = $entityManager->find(Status::class, 1);
-            } elseif ($eventForm->get("publishEvent")->isClicked()) {
-                $status = $entityManager->find(Status::class, 2);
-            }
-            $event->setStatus($status);
-
-            $purifyString = $swearWordCensor->purify($event->getName());
-            $event->setName($purifyString);
-            $purifyString = $swearWordCensor->purify($event->getInfos());
-            $event->setInfos($purifyString);
-
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Event added !');
-            return $this->redirectToRoute('main_home');
+            return $this->checkDataSendToDB($eventForm, $entityManager, $status, $event, $swearWordCensor);
         }
 
         return $this->render('go_out/manage.html.twig', [
@@ -207,5 +176,34 @@ class GoOutController extends AbstractController
             'cancelEventForm' => $eventForm->createView(),
             'event' => $event
         ]);
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormInterface $eventForm
+     * @param EntityManagerInterface $entityManager
+     * @param $status
+     * @param Event $event
+     * @param SwearWordCensor $swearWordCensor
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function checkDataSendToDB(\Symfony\Component\Form\FormInterface $eventForm, EntityManagerInterface $entityManager, $status, Event $event, SwearWordCensor $swearWordCensor): \Symfony\Component\HttpFoundation\RedirectResponse
+    {
+        if ($eventForm->get("createEvent")->isClicked()) {
+            $status = $entityManager->find(Status::class, 1);
+        } elseif ($eventForm->get("publishEvent")->isClicked()) {
+            $status = $entityManager->find(Status::class, 2);
+        }
+        $event->setStatus($status);
+
+        $purifyString = $swearWordCensor->purify($event->getName());
+        $event->setName($purifyString);
+        $purifyString = $swearWordCensor->purify($event->getInfos());
+        $event->setInfos($purifyString);
+
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Event added !');
+        return $this->redirectToRoute('main_home');
     }
 }
