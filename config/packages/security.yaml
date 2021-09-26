@@ -5,6 +5,7 @@ security:
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
+        ROLE_USER: IS_AUTHENTICATED_ANONYMOUSLY
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -46,5 +47,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ˆ/profile/manage, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/security, roles: ROLE_USER }
+        - { path: ^/security, roles: IS_AUTHENTICATED_ANONYMOUSLY }
