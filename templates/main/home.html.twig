@@ -10,12 +10,39 @@
         <h1 class="headmess"> Wanna Go Out ? </h1>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
-        <p> Here's a list of events </p>
+        <h3>Event filters</h3>
         <section>
-            <section id="campusNames">
+            <label>Campus</label>
+            <select id="campusNames">
+            </select>
 
-            </section>
+            <div>
+                <label>Search by words</label>
+                <input type="search">
+            </div>
+
+            <div>
+                <label>From</label>
+                <input type="date">
+                <label>To</label>
+                <input type="date">
+            </div>
+
+            <div>
+                <label>Events where I am Organiser</label>
+                <input type="checkbox">
+                <label>Events I am subscribed to</label>
+                <input type="checkbox">
+                <label>Events I am not subscribed to</label>
+                <input type="checkbox">
+                <label>Past events</label>
+                <input type="checkbox">
+            </div>
+
+            <button>Search</button>
         </section>
+        <h3> Here's a list of events </h3>
+
         <table class="eventTables">
             <tr>
                 <th>Outing Name</th>
@@ -80,8 +107,25 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        window.onload =(){
-            initCampusNames()
+
+    function initCampusNames(){
+    //json response
+    fetch("http://localhost:8888/GO/public/api/campus", {method:"GET"})
+        .then(response => response.json())
+        .then(response =>{
+            console.log(response);
+            let option = ""
+            response.map(campusName =>{
+                option += `<option value="${campusName.id}">${campusName.name}</option>`
+            })
+            console.log(option);
+            document.querySelector("#campusNames").innerHTML= option;
+        })
+        .catch(e=>(alert("ERROR : no options")))
+}
+
+        window.onload =()=>{
+            initCampusNames();
         }
     </script>
 {% endblock %}
