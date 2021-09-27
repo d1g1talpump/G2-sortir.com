@@ -6,6 +6,7 @@ use App\Repository\CampusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CampusRepository::class)
@@ -16,11 +17,13 @@ class Campus
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups ("campusNames")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Groups ("campusNames")
      */
     private $name;
 
