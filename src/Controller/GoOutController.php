@@ -15,6 +15,8 @@ use App\Services\SwearWordCensor;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -178,15 +180,14 @@ class GoOutController extends AbstractController
         ]);
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $eventForm
-     * @param EntityManagerInterface $entityManager
-     * @param $status
-     * @param Event $event
-     * @param SwearWordCensor $swearWordCensor
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function checkDataSendToDB(\Symfony\Component\Form\FormInterface $eventForm, EntityManagerInterface $entityManager, $status, Event $event, SwearWordCensor $swearWordCensor): \Symfony\Component\HttpFoundation\RedirectResponse
+
+    public function checkDataSendToDB(
+        FormInterface          $eventForm,
+        EntityManagerInterface $entityManager,
+        Status                 $status,
+        Event                  $event,
+        SwearWordCensor        $swearWordCensor
+    ): RedirectResponse
     {
         if ($eventForm->get("createEvent")->isClicked()) {
             $status = $entityManager->find(Status::class, 1);
