@@ -81,12 +81,4 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route ("/desactivate", name="desactivate")
-     */
-
-    public function desactivateProfile(): Response
-    {
-        //TODO finish this method
-    }
 }
