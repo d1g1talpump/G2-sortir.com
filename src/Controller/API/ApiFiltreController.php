@@ -38,7 +38,7 @@ class ApiFiltreController extends AbstractController
             //json
             //convertir en json
             //$json = json_encode();
-            $json = $serializer->serialize($campus, 'json');
+            $json = $serializer->serialize($campus, 'json', ['groups'=>"campusNames"]);
             return new JsonResponse($json, Response::HTTP_OK, [], true);
         }
 
