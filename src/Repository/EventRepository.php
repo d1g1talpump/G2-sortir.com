@@ -28,6 +28,14 @@ class EventRepository extends ServiceEntityRepository
         ;
         $query = $queryBuilder->getQuery();
         return $query->getResult();
+
+    public function subscribedUsers()
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+                             ->leftJoin('e.users', 'u')
+                             ->addSelect('u');
+        $query = $queryBuilder->getQuery();
+        return new Paginator($query);
     }
 
 

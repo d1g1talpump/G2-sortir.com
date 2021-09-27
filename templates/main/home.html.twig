@@ -17,12 +17,13 @@
                 <th>Date of outing</th>
                 <th>Subscription Closure Date</th>
                 <th>subscribed / available places</th>
-                <th>Status</th>
                 <th>Subscribed</th>
+                <th>Status</th>
                 <th>Organiser</th>
                 <th>Actions</th>
             </tr>
             {% for event in allEvents %}
+
                 <tr onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`">
                     <td>{{ event.name }}</td>
                     <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
@@ -32,6 +33,30 @@
                             {% for eventID, count in line %}
                                 {% if eventID == event.id %}
                                     {{ count }}
+                    </td>
+                    /*
+                        <td>
+                            {{ event.users|length }} / {{ event.maxSub }}
+                            {% if event.limitSubDate < date() %}
+                                / Subscriptions closed.
+                            {% endif %}
+                        </td>
+                        */
+                        <td>{% if event in eventsCurrentUser %} * {% endif %}</td>
+                        <td>{{ event.status.label }}</td>
+                        <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
+                        <td>
+                            {# Check if the current user is the organiser #}
+                            {% if app.user.pseudo != event.organiser.pseudo %}
+                                {% if event not in eventsCurrentUser %}
+                                    {% if event.limitSubDate >= date() %}
+                                        <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
+                                    {% else %}
+                                        <a href="{{ path('goOut_details', {'id': event.id}) }}">Afficher</a>
+                                        {% endif %}
+                                {% else %}
+                                    <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Unsubscribe</a>
+
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}

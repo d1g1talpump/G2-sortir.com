@@ -17,9 +17,14 @@ class MainController extends AbstractController
     public function home(EventRepository $eventRepository): Response
     {
 
+
         $allEvents = $eventRepository->allEventsForHomePage(); //TODO uncomment the condition in the query method when the fixture is fixed
 
         $subsPerEvent = $this->getSubsPerEvent($allEvents);
+
+        $allEvents = $eventRepository->findAll();
+        $eventsCurrentUser = null;
+
 
         //Get all events subscribed by current user
         $eventsCurrentUser = null;
