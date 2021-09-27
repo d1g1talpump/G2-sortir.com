@@ -11,6 +11,11 @@
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <p> Here's a list of events </p>
+        <section>
+            <section id="campusNames">
+
+            </section>
+        </section>
         <table class="eventTables">
             <tr>
                 <th>Outing Name</th>
@@ -70,4 +75,13 @@
         </table>
     {% endif %}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload =(){
+            initCampusNames()
+        }
+    </script>
 {% endblock %}

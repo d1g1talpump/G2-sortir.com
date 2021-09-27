@@ -12,7 +12,7 @@ class StatusFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager)
     {
 
-         for ($i=1 ; $i<=8 ; $i++){
+         for ($i=1 ; $i<=7 ; $i++){
              $status = new Status();
              switch ($i){
                  case 1: $status->setLabel('Created');
@@ -28,21 +28,21 @@ class StatusFixtures extends Fixture implements FixtureGroupInterface
                  case 6: $status->setLabel('Cancelled');
                     break;
                  case 7: $status->setLabel('HIDE ME');
-                 break;
-                 default : $status->setLabel('Published');
-                 $manager->persist($status);
+                    break;
+                 default : $status->setLabel("Published");
              }
              $manager->persist($status);
+             $manager->flush();
+             $this->addReference(Status::class.$i, $status);
          }
 
-        $manager->flush();
-        $this->addReference(Status::class, $status);
+
     }
 
     public static function getGroups(): array
     {
         return [
-            'firstLoad', 'event'
+             'firstLoad', 'event', 'status'
         ];
     }
 }

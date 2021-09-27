@@ -8,6 +8,7 @@ use App\Entity\Place;
 use App\Entity\Status;
 use App\Entity\User;
 use App\Entity\City;
+use App\Repository\StatusRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -19,15 +20,8 @@ class EventFixtures extends Fixture implements DependentFixtureInterface, Fixtur
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('fr_CA');
-//        $status = new Status();
-//        try {
-//            $random = random_int(0, 7);
-//        } catch (\Exception $e) {
-//        }
-//        $status->getId($random);
 
-
-        for($i = 0; $i <=66; $i++){
+        for($i = 0; $i <=100; $i++){
 
             $event = new Event();
 
@@ -37,10 +31,10 @@ class EventFixtures extends Fixture implements DependentFixtureInterface, Fixtur
             $event->setMaxSub($faker->numberBetween(6, 66));
             $event->setStartDate($faker->dateTimeInInterval('now', '+6months'));
             $event->setLimitSubDate($faker->dateTimeInInterval($event->getStartDate(), '-1months'));
-            $event->setOrganiser($this->getReference(User::class.mt_rand(0,10)));
-            $event->setCampus($this->getReference(Campus::class.mt_rand(0,9)));
-            $event->setPlace($this->getReference(Place::class.mt_rand(0,20)));
-            $event->setStatus($this->getReference(Status::class));
+            $event->setOrganiser($this->getReference(User::class.mt_rand(0,50)));
+            $event->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
+            $event->setPlace($this->getReference(Place::class.mt_rand(0,30)));
+            $event->setStatus($this->getReference(Status::class.mt_rand(1,7)));
 
 
             $manager->persist($event);
