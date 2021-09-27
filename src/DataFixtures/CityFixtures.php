@@ -12,7 +12,7 @@ class CityFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create('fr_CA');
-        for ($i = 0; $i<=30; $i++){
+        for ($i = 0; $i<=15; $i++){
             $city = new City();
             $city->setName($faker->city());
             $city->setPostalCode($faker->postcode());

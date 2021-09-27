@@ -14,7 +14,10 @@
         {# {{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
-        {% block javascripts %}{#{{ encore_entry_script_tags('app') }}#}
+        {% block javascripts %}
+            <script src="node_modules/jquery/jquery.js"></script>
+            <script src="public/{{ asset('js/filtresAPI.js') }}"></script>
+            {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
 

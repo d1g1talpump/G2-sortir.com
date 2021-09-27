@@ -45,7 +45,7 @@ class EventRepository extends ServiceEntityRepository
 //            ->where("e.status = 3")
             ->andWhere("e.startDate < CURRENT_TIMESTAMP()")
             ->andWhere("DATE_ADD(e.startDate, e.duration, 'MINUTE') > CURRENT_TIMESTAMP()");
-
+      
         $query = $queryBuilder->getQuery();
         return new Paginator($query);
     }
