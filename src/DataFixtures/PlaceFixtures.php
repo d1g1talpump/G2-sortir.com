@@ -18,7 +18,7 @@ class PlaceFixtures extends Fixture implements DependentFixtureInterface, Fixtur
         for ($i = 0 ; $i <= 30 ; $i++){
             $place = new Place();
             $place->setName($faker->word());
-            $place->setCity($this->getReference(City::class.mt_rand(0,30)));
+            $place->setCity($this->getReference(City::class.mt_rand(0,15)));
             $place->setLatitude($faker->latitude(-79.76, 44.99));
             $place->setLongitude($faker->longitude(-57.10, 62.59));
             $place->setStreet($faker->streetAddress());
