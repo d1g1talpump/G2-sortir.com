@@ -4,6 +4,7 @@ namespace App\Controller\API;
 
 use App\Repository\CampusRepository;
 
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,7 @@ class ApiFiltreController extends AbstractController
      */
     public function filtreCampus(
                                 CampusRepository $campusRepository,
+                                EventRepository $eventRepository,
                                 SerializerInterface $serializer,
                                 Request $request){
 
@@ -44,6 +46,17 @@ class ApiFiltreController extends AbstractController
             $json = $serializer->serialize($campus, 'json', ['groups'=>"campusNames"]);
             return new JsonResponse($json, Response::HTTP_OK, [], true);
         }
+
+    }
+
+    public function searchButton(EventRepository $eventRepository,
+                                CampusRepository $campusRepository,
+                                Request $request,
+                                SerializerInterface $serializer){
+        $searchByCampus = $eventRepository->findByCampusNames();
+
+        $json = $serializer->serialize($searchByCampus, 'json', ['groups'=>"campusNames"]);
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
 
     }
 }

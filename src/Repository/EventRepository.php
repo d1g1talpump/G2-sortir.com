@@ -29,6 +29,15 @@ class EventRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
+    public function findByCampusNames()
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->leftJoin('e.campus', 'c')
+            ->addSelect('c.name');
+        $query = $queryBuilder->getQuery();
+        return new Paginator($query);
+    }
+
     /*
     public function findOneBySomeField($value): ?Event
     {

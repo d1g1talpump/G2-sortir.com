@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -58,6 +59,7 @@ class Event
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ("campusNames")
      */
     private $campus;
 
