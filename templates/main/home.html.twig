@@ -8,6 +8,9 @@
             <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
         </a>
         <h1 class="headmess"> Wanna Go Out ? </h1>
+    {% elseif not app.user.active %}
+        <h1 class="headmess"> Sorry, your account has been deactivated</h1>
+        <h1 class="headmess">Please contact the <a href="mailto:admin@sortir.com">admin</a></h1>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <h3>Event filters</h3>
@@ -79,7 +82,7 @@
                         {% if app.user.admin %}
                             <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
                         {% else %}
-                            <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                            {{ event.organiser.pseudo }}
                         {% endif %}
                     </td>
                     <td>
