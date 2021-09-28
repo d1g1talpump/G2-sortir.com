@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if not app.user or app.user.admin %}
+    {% if not app.user %}
         {{ include('inc/register.html.twig') }}
     {% else %}
         {{ include('inc/edit.html.twig') }}

@@ -11,13 +11,36 @@
 
 {% block body %}
     {% if app.user.id == selectedUser.id %}
-        <h1>My Profile</h1>
-        <div>
-            <span>Pseudo : {{ app.user.pseudo }}</span>
-        </div>
-        {{ include('inc/userSummary.html.twig') }}
+        <h1>My Profile - {{ app.user.pseudo }}</h1>
+        <div id="profile-container">
+            <div id="profile-header">
+                <div class="rounded-img">
+                    <img src="{{ asset('img/profiles/')~app.user.picture }}"
+                         alt="Profil's picture of the user"
+                         class="big-img"
+                    >
+                </div>
+            </div>
+            <div>
+                <span>Pseudo : </span>
+            </div>
+            <div>
+                <span>First Name : {{ app.user.firstname }}</span>
+            </div>
+            <div>
+                <span>Last Name : {{ app.user.lastname }}</span>
+            </div>
+            <div>
+                <span>Telephone : {{ app.user.telephone }}</span>
+            </div>
+            <div>
+                <span>Email : {{ app.user.email }}</span>
+            </div>
+            <div>
+                <span>Campus : {{ app.user.campus.name }}</span>
+            </div>
 
-        <div>
+        <div class="btn-container">
             <button>
                 <a href="{{ path('profile_manage') }}">Edit profile</a>
             </button>

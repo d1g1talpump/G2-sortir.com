@@ -3,16 +3,19 @@
 {% block title %}{{ parent() }} | Home{% endblock %}
 
 {% block body %}
+
     {% if not app.user %}
-        <a href="{{ path('app_login') }}">
-            <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
-        </a>
+        <div id="title-img">
+            <a href="{{ path('app_login') }}">
+                <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
+            </a>
+        </div>
+
         <h1 class="headmess"> Wanna Go Out ? </h1>
     {% elseif not app.user.active %}
         <h1 class="headmess"> Sorry, your account has been deactivated</h1>
         <h1 class="headmess">Please contact the <a href="mailto:admin@sortir.com">admin</a></h1>
     {% else %}
-        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
         <h3>Event filters</h3>
         <section>
             <label>Campus</label>
@@ -44,94 +47,57 @@
 
             <button>Search</button>
         </section>
-        <h3> Here's a list of events </h3>
-
-        <table class="eventTables">
-            <tr>
-                <th>Outing Name</th>
-                <th>Date of outing</th>
-                <th>Subscription Closure Date</th>
-                <th>subscribed / available places</th>
-                <th>Subscribed</th>
-                <th>Status</th>
-                <th>Organiser</th>
-                <th>Actions</th>
-            </tr>
-            {% for event in allEvents %}
-
-                <tr onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`">
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.startDate|date('d/m/Y h:i') }}</td>
-                    <td>{{ event.limitSubDate|date('d/m/Y h:i') }}</td>
-                    <td>
-                        {% for line in subsPerEvent %}
-                            {% for eventID, count in line %}
-                                {% if eventID == event.id %}
-                                    {{ count }}
-                    </td>
-                    /*
-                        <td>
-                            {{ event.users|length }} / {{ event.maxSub }}
-                            {% if event.limitSubDate < date() %}
-                                / Subscriptions closed.
-                            {% endif %}
-                        </td>
-                        */
-                        <td>{% if event in eventsCurrentUser %} * {% endif %}</td>
-                        <td>{{ event.status.label }}</td>
-                        <td><a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a></td>
-                        <td>
-                            {# Check if the current user is the organiser #}
-                            {% if app.user.pseudo != event.organiser.pseudo %}
-                                {% if event not in eventsCurrentUser %}
-                                    {% if event.limitSubDate >= date() %}
-                                        <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
-                                    {% else %}
-                                        <a href="{{ path('goOut_details', {'id': event.id}) }}">Afficher</a>
-                                        {% endif %}
+        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
+        {% for event in allEvents %}
+            <ul id="events-board">
+                <li onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`" class="flex-container">
+                    <div>
+                        <div class="flex-container row">
+                            <h2>{{ event.name }}</h2>
+                            <p>The {{ event.startDate|date('d/m/Y') }} at {{ event.startDate|date('h:i') }} </p>
+                            <p>
+                                {% if app.user.admin %}
+                                    <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
                                 {% else %}
-                                    <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Unsubscribe</a>
-
+                                    {{ event.organiser.pseudo }}
                                 {% endif %}
-                            {% endfor %}
-                        {% endfor %}
-                        / {{ event.maxSub }}</td>
-                    <td>{{ event.status.label }}</td>
-                    <td>
-                        {% if event in eventsCurrentUser %}
-                            *
-                        {% else %}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if app.user.admin %}
-                            <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
-                        {% else %}
-                            {{ event.organiser.pseudo }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        {# Check if the current user is the organiser #}
-                        {% if app.user.pseudo != event.organiser.pseudo %}
-                            {% if event in eventsCurrentUser %}
-                                <a href="{{ path('goOut_leave', {'id': event.id}) }}">Unsubscribe</a>
-                            {% else %}
-                                <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
-                            {% endif %}
-                        {% else %}
-                            {% if event.status.id == 2 %}
-                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify</a>
-                                <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Cancel</a>
-                            {% elseif event.status.id == 6 %}
-                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and Republish</a>
-                            {% else %}
-                                <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Publish</a>
-                            {% endif %}
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
+                            </p>
+                            <p>{{ event.status.label }}</p>
+                        </div>
+                    </div><!--
+                    --><div>
+                        <div class="flex-container row">
+                            <div>
+                                <p>Subscriptions ends the {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
+                                <p>Avalaibles places : {{ event.users|length }} / {{ event.maxSub }}</p>
+                            </div>
+
+                            <p>
+
+                                {# Check if the current user is the organiser #}
+                                {% if app.user.pseudo != event.organiser.pseudo and event.limitSubDate <= date() %}
+                                    {% if event in eventsCurrentUser %}
+                                        <a href="{{ path('goOut_leave', {'id': event.id}) }}">Unsubscribe</a>
+                                    {% else %}
+                                        <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
+                                    {% endif %}
+                                {% else %}
+                                    {% if event.status.id == 2 %}
+                                        <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify</a>
+                                        <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Cancel</a>
+                                    {% elseif event.status.id == 6 %}
+                                        <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and Republish</a>
+                                    {% else %}
+                                        <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Publish</a>
+                                    {% endif %}
+                                {% endif %}
+
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        {% endfor %}
     {% endif %}
 
 {% endblock %}

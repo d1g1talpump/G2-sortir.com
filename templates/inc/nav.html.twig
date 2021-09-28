@@ -1,20 +1,19 @@
 <nav>
     <ul>
-        <li>
-            {% if app.user %}
+        {% if app.user %}
+            <li>
                 <a href="{{ path('main_home') }}">
                     <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
                 </a>
-            {% endif %}
-        </li>
-        {% if app.user %}
+            </li>
             <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
             <li><a href="{{ path('goOut_add') }}" title="Add an Event">Add an Event</a></li>
             <li><a href="{{ path('profile_view', {'id': app.user.id}) }}" title="View Profile">View Profile</a></li>
-            <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out | {{ app.user.pseudo }}</a></li>
+            <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out</a></li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('admin_dashboard') }}" title="Log Out">Admin Dashboard</a></li>
             {% endif %}
-        {% endif %}
     </ul>
+
+    {% endif %}
 </nav>
