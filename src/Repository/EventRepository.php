@@ -21,54 +21,12 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function allEventsForHomePage(): Paginator
+    public function allEventsForHomePage()
     {
         $queryBuilder = $this->createQueryBuilder('e')
             ->andWhere("e.status BETWEEN 1 AND 6");
         $query = $queryBuilder->getQuery();
-        return new Paginator($query);
-    }
-
-    public function getEventsSubscriptionEnded(): Paginator
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-//            ->where("e.status = 2")
-            ->andWhere("e.limitSubDate < CURRENT_TIMESTAMP()");
-
-        $query = $queryBuilder->getQuery();
-        return new Paginator($query);
-    }
-
-    public function getEventsJustStarted(): Paginator
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-//            ->where("e.status = 3")
-            ->andWhere("e.startDate < CURRENT_TIMESTAMP()")
-            ->andWhere("DATE_ADD(e.startDate, e.duration, 'MINUTE') > CURRENT_TIMESTAMP()");
-        $query = $queryBuilder->getQuery();
-        return new Paginator($query);
-    }
-
-    public function getEventsJustEnded(): Paginator
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-//            ->where("e.status = 4")
-            ->andWhere("e.startDate < CURRENT_TIMESTAMP()")
-            ->andWhere("DATE_ADD(e.startDate, e.duration, 'MINUTE') < CURRENT_TIMESTAMP()");
-
-        $query = $queryBuilder->getQuery();
-        return new Paginator($query);
-    }
-
-
-    public function getEventsToHide(): Paginator
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-//            ->where('e.status IN(1, 6)')
-            ->andWhere("DATE_ADD(DATE_ADD(e.startDate, e.duration, 'MINUTE'), 28, 'DAY') < CURRENT_TIMESTAMP()");
-
-        $query = $queryBuilder->getQuery();
-        return new Paginator($query);
+        return $query->getResult();
     }
 
     /*
