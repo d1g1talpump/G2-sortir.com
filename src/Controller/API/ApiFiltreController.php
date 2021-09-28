@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ApiFiltreController extends AbstractController
 {
     /**
+     *
      * @Route("/api/campus", name="api_filtre_campus", methods={"GET"})
      * @param CampusRepository $campusRepository
      * @param SerializerInterface $serializer
@@ -24,9 +25,10 @@ class ApiFiltreController extends AbstractController
                                 SerializerInterface $serializer,
                                 Request $request){
 
-
+        // get the name query
         $campus = $campusRepository->findByName();
 
+        //if twig
         if($request->query->get('option', 'json') == 'twig'){
             //twig
             $html = $this->renderView('inc/_select.html.twig', [
@@ -34,8 +36,9 @@ class ApiFiltreController extends AbstractController
             ]);
             return new Response($html);
         }
+        // if json
         else{
-            //json
+
             //convertir en json
             //$json = json_encode();
             $json = $serializer->serialize($campus, 'json', ['groups'=>"campusNames"]);
