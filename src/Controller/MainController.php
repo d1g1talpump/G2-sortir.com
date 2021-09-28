@@ -24,10 +24,6 @@ class MainController extends AbstractController
         AutoUpdateEventStatus $autoUpdateEventStatus
     ): Response
     {
-        $autoUpdateEventStatus->setSubscriptionsEnded($eventRepository, $statusRepository, $entityManager);
-        $autoUpdateEventStatus->setEventsInProgress($eventRepository, $statusRepository, $entityManager);
-        $autoUpdateEventStatus->setEventsEnded($eventRepository, $statusRepository, $entityManager);
-        $autoUpdateEventStatus->setEventsToHide($eventRepository, $statusRepository, $entityManager);
 
         $allEvents = $eventRepository->allEventsForHomePage();
 
