@@ -15,43 +15,19 @@
         <div>
             <span>Pseudo : {{ app.user.pseudo }}</span>
         </div>
-        <div>
-            <span>First Name : {{ app.user.firstname }}</span>
-        </div>
-        <div>
-            <span>Last Name : {{ app.user.lastname }}</span>
-        </div>
-        <div>
-            <span>Telephone : {{ app.user.telephone }}</span>
-        </div>
-        <div>
-            <span>Email : {{ app.user.email }}</span>
-        </div>
-        <div>
-            <span>Campus : {{ app.user.campus.name }}</span>
-        </div>
+        {{ include('inc/userSummary.html.twig') }}
 
         <div>
             <button>
                 <a href="{{ path('profile_manage') }}">Edit profile</a>
             </button>
         </div>
+    {% elseif app.user.admin %}
+        <h1>Update User</h1>
+        {{ include('inc/userSummary.html.twig') }}
+        {{ form(updateUserPrivilegesForm) }}
     {% else %}
         <h1>{{ selectedUser.pseudo }}</h1>
-        <div>
-            <span>First Name : {{ selectedUser.firstname }}</span>
-        </div>
-        <div>
-            <span>Last Name : {{ selectedUser.lastname }}</span>
-        </div>
-        <div>
-            <span>Telephone : {{ selectedUser.telephone }}</span>
-        </div>
-        <div>
-            <span>Email : {{ selectedUser.email }}</span>
-        </div>
-        <div>
-            <span>Campus : {{ selectedUser.campus.name }}</span>
-        </div>
+        {{ include('inc/userSummary.html.twig') }}
     {% endif %}
 {% endblock %}

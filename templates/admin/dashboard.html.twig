@@ -13,10 +13,11 @@
 
     <ul>
         {% for user in allUsers %}
-            <li><a href="{{ path('profile_view', {'id': user.id}) }}">{{ user.id }} : {{ user.pseudo }}</a></li>
+            <li><a href="{{ path('admin_managePrivileges', {'id': user.id}) }}">{{ user.id }} : {{ user.pseudo }}</a></li>
         {% endfor %}
     </ul>
 
+    <button><a href="{{ path('admin_add_user') }}">Add New User</a></button>
 
 </div>
 {% endblock %}
