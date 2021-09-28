@@ -3,7 +3,6 @@
 {% block title %}{{ parent() }} | Log in{% endblock %}
 
 {% block body %}
-    <h1 class="signin-lbl">Please sign in Mate</h1>
     <form id="signin" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,7 +14,7 @@
             </div>
         {% endif %}
 
-
+        <h1 class="signin-lbl">Please sign in Mate</h1>
         <label class="signin-lbl" for="inputEmail">Email</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                autocomplete="email" required autofocus>
@@ -33,17 +32,13 @@
             </label>
         </div>
 
-        <div class="btn-container">
-            <button class="signin-btn" type="submit">
-                Sign in
-            </button>
-        </div>
 
-        <div class="form-link-container">
-            <a href="{{ path('profile_manage') }}">New User?</a>
-            <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
-        </div>
+        <button class="signin-btn" type="submit">
+            Sign in
+        </button>
     </form>
-
-
+    <div class="register-forgot">
+        <a href="{{ path('profile_manage') }}">New User?</a>
+        <a href="{{ path('app_forgot_password_request') }}">Forgot Your Password?</a>
+    </div>
 {% endblock %}

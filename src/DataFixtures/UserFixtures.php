@@ -37,8 +37,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
             $user->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
             $user->setRoles(["ROLE_USER"]);
             $user->setPassword($hash);
-            $random = random_int(1, 6);
-            $user->setPicture('/default/'.$random.'.jpg');
 
             $manager->persist($user);
             $this->addReference(User::class.$i, $user);

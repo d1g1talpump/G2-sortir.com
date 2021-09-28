@@ -41,22 +41,14 @@
 
         {{ form_label(eventForm.place) }}
         {{ form_widget(eventForm.place) }}
-
-        <div class="btn-container">
-            {{ form_widget(eventForm.publishEvent) }}
-            {{ form_widget(eventForm.createEvent) }}
-        </div>
-
-        <div class="form-link-container">
-            <a href="{{ path('main_home') }}">Back to home</a>
-        </div>
-
-        {{ form_end(eventForm) }}
-
-
     </div>
 
+    {{ form_widget(eventForm.publishEvent) }}
+    {{ form_widget(eventForm.createEvent) }}
 
+    {{ form_end(eventForm) }}
+
+    <a href="{{ path('main_home') }}">Back to home</a>
 
 {% endblock %}
 

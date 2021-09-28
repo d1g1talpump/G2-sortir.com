@@ -55,7 +55,7 @@
                     <th>Pseudo</th>
                     <th>Name</th>
                 </tr>
-                {% for participant in event.users %}
+                {% for participant in participants %}
                     {% if app.user.admin %}
                         <tr onclick="window.location.href=`{{ path('admin_managePrivileges', {'id': participant.id}) }}`">
                     {% else %}
