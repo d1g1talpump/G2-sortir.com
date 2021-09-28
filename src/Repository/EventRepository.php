@@ -26,17 +26,6 @@ class EventRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('e')
             ->andWhere("e.status BETWEEN 1 AND 6");
         $query = $queryBuilder->getQuery();
-
-        return $query->getResult();
-    }
-    
-    public function subscribedUsers()
-    {
-        $queryBuilder = $this->createQueryBuilder('e')
-                             ->leftJoin('e.users', 'u')
-                             ->addSelect('u');
-        $query = $queryBuilder->getQuery();
-
         return new Paginator($query);
     }
 
