@@ -1,6 +1,6 @@
 function initCampusNames(){
     //json response
-    fetch("http://localhost:8888/GO/public/api/campus", {method:"GET"})
+    fetch("{{app_url_api}}/campus", {method:"GET"})
         .then(response => response.json())
         .then(response =>{
             console.log(response);
@@ -16,7 +16,7 @@ function initCampusNames(){
 
 function initCampusNamesTwig() {
     // twig response
-    fetch("http://localhost:8888/GO/public/api/campus?option=twig", {method: "GET"})
+    fetch("{{app_url_api}}/campus?option=twig", {method: "GET"})
         .then(response => response.text())
         .then(response => {
             document.querySelector("#campusNames").innerHTML = response;
