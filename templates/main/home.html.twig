@@ -76,7 +76,11 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                        {% if app.user.admin %}
+                            <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                        {% else %}
+                            <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                        {% endif %}
                     </td>
                     <td>
                         {# Check if the current user is the organiser #}
@@ -108,23 +112,23 @@
     {{ parent() }}
     <script>
 
-    function initCampusNames(){
-    //json response
-    fetch("http://localhost:8888/GO/public/api/campus", {method:"GET"})
-        .then(response => response.json())
-        .then(response =>{
-            console.log(response);
-            let option = ""
-            response.map(campusName =>{
-                option += `<option value="${campusName.id}">${campusName.name}</option>`
-            })
-            console.log(option);
-            document.querySelector("#campusNames").innerHTML= option;
-        })
-        .catch(e=>(alert("ERROR : no options")))
-}
+        function initCampusNames() {
+            //json response
+            fetch("http://localhost:8888/GO/public/api/campus", {method: "GET"})
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    let option = ""
+                    response.map(campusName => {
+                        option += `<option value="${campusName.id}">${campusName.name}</option>`
+                    })
+                    console.log(option);
+                    document.querySelector("#campusNames").innerHTML = option;
+                })
+                .catch(e => (alert("ERROR : no options")))
+        }
 
-        window.onload =()=>{
+        window.onload = () => {
             initCampusNames();
         }
     </script>
