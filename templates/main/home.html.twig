@@ -8,9 +8,44 @@
             <img class="mainimg" src="{{ asset('img/logo-GO.png') }}" alt="Logo Go Out">
         </a>
         <h1 class="headmess"> Wanna Go Out ? </h1>
+    {% elseif not app.user.active %}
+        <h1 class="headmess"> Sorry, your account has been deactivated</h1>
+        <h1 class="headmess">Please contact the <a href="mailto:admin@sortir.com">admin</a></h1>
     {% else %}
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
-        <p> Here's a list of events </p>
+        <h3>Event filters</h3>
+        <section>
+            <label>Campus</label>
+            <select id="campusNames">
+            </select>
+
+            <div>
+                <label>Search by words</label>
+                <input type="search">
+            </div>
+
+            <div>
+                <label>From</label>
+                <input type="date">
+                <label>To</label>
+                <input type="date">
+            </div>
+
+            <div>
+                <label>Events where I am Organiser</label>
+                <input type="checkbox">
+                <label>Events I am subscribed to</label>
+                <input type="checkbox">
+                <label>Events I am not subscribed to</label>
+                <input type="checkbox">
+                <label>Past events</label>
+                <input type="checkbox">
+            </div>
+
+            <button>Search</button>
+        </section>
+        <h3> Here's a list of events </h3>
+
         <table class="eventTables">
             <tr>
                 <th>Outing Name</th>
@@ -69,7 +104,11 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('profile_view', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                        {% if app.user.admin %}
+                            <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
+                        {% else %}
+                            {{ event.organiser.pseudo }}
+                        {% endif %}
                     </td>
                     <td>
                         {# Check if the current user is the organiser #}
@@ -95,4 +134,31 @@
         </table>
     {% endif %}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+    function initCampusNames(){
+    //json response
+    fetch("{{app_url_api}}/campus", {method:"GET"})
+        .then(response => response.json())
+        .then(response =>{
+            console.log(response);
+            let option = ""
+            response.map(campusName =>{
+                option += `<option value="${campusName.id}">${campusName.name}</option>`
+            })
+            console.log(option);
+            document.querySelector("#campusNames").innerHTML= option;
+        })
+        .catch(e=>(alert("ERROR : no options")))
+}
+
+
+        window.onload = () => {
+            initCampusNames();
+        }
+    </script>
 {% endblock %}

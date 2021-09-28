@@ -15,6 +15,8 @@ use App\Services\SwearWordCensor;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -92,9 +94,11 @@ class GoOutController extends AbstractController
     ): Response
     {
         $event = $eventRepository->find($id);
+        $participants = $event->getUsers();
 
         return $this->render('go_out/details.html.twig', [
-            "event" => $event
+            "event" => $event,
+            "participants" => $participants
         ]);
     }
 
@@ -109,6 +113,7 @@ class GoOutController extends AbstractController
     {
         $event = $eventRepository->find($id);
         $currentUser = $this->getUser();
+        $participants = $event->getUsers();
 
         $currentUser->subscribeEvent($event);
 
@@ -116,6 +121,8 @@ class GoOutController extends AbstractController
 
         return $this->render('go_out/details.html.twig', [
             'event' => $event,
+            'currentUser'=>$currentUser,
+            'participants'=>$participants
         ]);
     }
 
@@ -178,15 +185,14 @@ class GoOutController extends AbstractController
         ]);
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormInterface $eventForm
-     * @param EntityManagerInterface $entityManager
-     * @param $status
-     * @param Event $event
-     * @param SwearWordCensor $swearWordCensor
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function checkDataSendToDB(\Symfony\Component\Form\FormInterface $eventForm, EntityManagerInterface $entityManager, $status, Event $event, SwearWordCensor $swearWordCensor): \Symfony\Component\HttpFoundation\RedirectResponse
+
+    public function checkDataSendToDB(
+        FormInterface          $eventForm,
+        EntityManagerInterface $entityManager,
+        Status                 $status,
+        Event                  $event,
+        SwearWordCensor        $swearWordCensor
+    ): RedirectResponse
     {
         if ($eventForm->get("createEvent")->isClicked()) {
             $status = $entityManager->find(Status::class, 1);

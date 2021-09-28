@@ -17,7 +17,7 @@
             <span>Time and Date of Event : {{ event.startDate|date('D d/m/Y H:i') }}</span>
         </div>
         <div>
-            <span>Subscription Closure Date : {{ event.limitSubDate|date('d/m/Y h:i') }}</span>
+            <span>Subscription Closure Date : {{ event.limitSubDate|date('D d/m/Y h:i') }}</span>
         </div>
         <div>
             <span>Number of places : {{ event.maxSub }}</span>
@@ -55,10 +55,17 @@
                     <th>Pseudo</th>
                     <th>Name</th>
                 </tr>
-                <tr>
-                    <td>poopooman</td>
-                    <td>Alex</td>
-                </tr>
+                {% for participant in participants %}
+                    {% if app.user.admin %}
+                        <tr onclick="window.location.href=`{{ path('admin_managePrivileges', {'id': participant.id}) }}`">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td>{{ participant.pseudo }}</td>
+                    <td>{{ participant.firstname }} {{ participant.lastname }}</td>
+                    </tr>
+                {% endfor %}
+                }
             </table>
         </div>
     </div>

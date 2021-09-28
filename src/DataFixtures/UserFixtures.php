@@ -23,7 +23,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
     {
         $faker = \Faker\Factory::create('en_CA');
 
-        for($i = 0; $i <=20; $i++){
+        for($i = 0; $i <=50; $i++){
 
             $user = new User();
             $hash = $this->encoder->encodePassword($user, 'password');
@@ -34,7 +34,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
             $user->setTelephone($faker->phoneNumber());
             $user->setAdmin(false);
             $user->setActive(true);
-            $user->setCampus($this->getReference(Campus::class.mt_rand(0,9)));
+            $user->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
             $user->setRoles(["ROLE_USER"]);
             $user->setPassword($hash);
 

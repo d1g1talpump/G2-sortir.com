@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Repository\EventRepository;
 
+use App\Repository\StatusRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,11 +16,15 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
-    public function home(EventRepository $eventRepository): Response
+    public function home(
+        EventRepository $eventRepository,
+        StatusRepository $statusRepository,
+        EntityManagerInterface $entityManager
+    ): Response
     {
 
+        $allEvents = $eventRepository->allEventsForHomePage();
 
-        $allEvents = $eventRepository->allEventsForHomePage(); //TODO uncomment the condition in the query method when the fixture is fixed
 
         $subsPerEvent = $this->getSubsPerEvent($allEvents);
 
@@ -54,4 +60,5 @@ class MainController extends AbstractController
         }
         return $subsPerEvent;
     }
+
 }
