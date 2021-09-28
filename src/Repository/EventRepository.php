@@ -26,7 +26,7 @@ class EventRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('e')
             ->andWhere("e.status BETWEEN 1 AND 6");
         $query = $queryBuilder->getQuery();
-        return $query->getResult();
+        return new Paginator($query);
     }
 
     public function findByCampusNames()

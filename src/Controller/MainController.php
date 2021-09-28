@@ -25,7 +25,12 @@ class MainController extends AbstractController
 
         $allEvents = $eventRepository->allEventsForHomePage();
 
+
         $subsPerEvent = $this->getSubsPerEvent($allEvents);
+
+        $allEvents = $eventRepository->findAll();
+        $eventsCurrentUser = null;
+
 
         //Get all events subscribed by current user
         $eventsCurrentUser = null;

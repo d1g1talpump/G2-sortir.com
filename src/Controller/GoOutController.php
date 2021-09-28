@@ -96,7 +96,7 @@ class GoOutController extends AbstractController
         $event = $eventRepository->find($id);
 
         return $this->render('go_out/details.html.twig', [
-            "event" => $event
+            "event" => $event,
         ]);
     }
 
@@ -111,6 +111,7 @@ class GoOutController extends AbstractController
     {
         $event = $eventRepository->find($id);
         $currentUser = $this->getUser();
+        $participants = $event->getUsers();
 
         $currentUser->subscribeEvent($event);
 
@@ -118,6 +119,8 @@ class GoOutController extends AbstractController
 
         return $this->render('go_out/details.html.twig', [
             'event' => $event,
+            'currentUser'=>$currentUser,
+            'participants'=>$participants
         ]);
     }
 

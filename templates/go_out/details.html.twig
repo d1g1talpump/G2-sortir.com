@@ -55,10 +55,17 @@
                     <th>Pseudo</th>
                     <th>Name</th>
                 </tr>
-                <tr>
-                    <td>poopooman</td>
-                    <td>Alex</td>
-                </tr>
+                {% for participant in event.users %}
+                    {% if app.user.admin %}
+                        <tr onclick="window.location.href=`{{ path('admin_managePrivileges', {'id': participant.id}) }}`">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                    <td>{{ participant.pseudo }}</td>
+                    <td>{{ participant.firstname }} {{ participant.lastname }}</td>
+                    </tr>
+                {% endfor %}
+                }
             </table>
         </div>
     </div>

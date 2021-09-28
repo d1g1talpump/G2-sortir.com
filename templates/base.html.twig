@@ -21,7 +21,7 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body class="flex-container column">
         <header>
             {% block header %}
                 {% if app.user %}
@@ -43,6 +43,7 @@
         {% block body %}
         {% endblock %}
     </main>
+
     <footer>
         <p id="copyright">&copy; Go Out {{ "now"|date("Y") }}</p>
     </footer>

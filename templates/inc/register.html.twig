@@ -1,13 +1,12 @@
 <h1>Register</h1>
 
 {{ form_start(manageProfileForm) }}
-        {{ form_widget(manageProfileForm) }}
-<div>
-    <p style="background-color: #88B04B">My Photo {# TODO upload photo function #}</p>
-</div>
+    {{ form_widget(manageProfileForm) }}
 
-<button type="submit" class="btn">Register</button>
-<button type="button" class="btn">
-    <a href="{{ path('main_home') }}">Cancel</a>
-</button>
+    <div class="btn-container">
+        <button type="submit" class="btn">Register</button>
+        <button type="button" class="btn">
+            <a href="{{ path('main_home') }}">Cancel</a>
+        </button>
+    </div>
 {{ form_end(manageProfileForm) }}
