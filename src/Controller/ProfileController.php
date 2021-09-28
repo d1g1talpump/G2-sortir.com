@@ -43,6 +43,24 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //recupere le photo choisie par l'utilisateur
+            $file = $form->get('picture')->getData();
+            if($file != null && !$user->getPicture()){
+
+                //crypte le nom du fichier avec un id unique
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                //change la localisation du fichier et hydrate l'utilisateur
+                $file->move($this->getParameter('users_profiles_directory'), $fileName);
+                $user->setPicture($fileName);
+
+            //sinon ajoute une photo par defaut parmis 6 fichiers
+            }else{
+                $random = random_int(1, 6);
+                $user->setPicture('/default/'.$random.'.jpg');
+            }
+
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -54,6 +72,7 @@ class ProfileController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
             // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
@@ -80,5 +99,4 @@ class ProfileController extends AbstractController
             'selectedUser' => $user,
         ]);
     }
-
 }
