@@ -6,10 +6,12 @@ use App\Entity\Campus;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Sodium\add;
 
 class ManageProfileFormType extends AbstractType
 {
@@ -32,7 +34,14 @@ class ManageProfileFormType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name'
-            ]);
+            ])
+            ->add('picture', FileType::class, [
+                'required' => false,
+                'data_class' => null,
+            ])
+
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

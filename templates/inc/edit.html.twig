@@ -35,6 +35,11 @@
     {{ form_widget(manageProfileForm.campus, {'attr': {'value': app.user.campus.name}}) }}
 </div>
 
+<div>
+    {{ form_label(manageProfileForm.picture) }}
+    {{ form_widget(manageProfileForm.picture) }}
+</div>
+
 <button type="submit" class="btn">Save</button>
 <button type="button" class="btn">
     <a href="{{ path('main_home') }}">Cancel</a>
