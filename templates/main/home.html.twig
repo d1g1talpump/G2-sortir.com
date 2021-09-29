@@ -3,7 +3,6 @@
 {% block title %}{{ parent() }} | Home{% endblock %}
 
 {% block body %}
-
     {% if not app.user %}
         <div id="title-img">
             <a href="{{ path('app_login') }}">
@@ -24,7 +23,7 @@
 
             <div>
                 <label>Search by words</label>
-                <input type="search" >
+                <input type="search">
             </div>
 
             <div>
@@ -48,13 +47,14 @@
             <button id="searchButton">Search</button>
         </section>
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
-        {% for event in allEvents %}
-            <ul id="events-board">
-                <li onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`" class="flex-container">
+        <ul id="events-board">
+            {% for event in allEvents %}
+                <li onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`"
+                    class="flex-container">
                     <div>
                         <div class="flex-container row">
                             <h2>{{ event.name }}</h2>
-                            <p>The {{ event.startDate|date('d/m/Y') }} at {{ event.startDate|date('h:i') }} </p>
+                            <p>{{ event.startDate|date('D d/m/Y') }} at {{ event.startDate|date('h:i') }} </p>
                             <p>
                                 {% if app.user.admin %}
                                     <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
@@ -64,64 +64,62 @@
                             </p>
                             <p>{{ event.status.label }}</p>
                         </div>
-                    </div><!--
-                    --><div>
+                    </div>
+                    <div>
                         <div class="flex-container row">
                             <div>
-                                <p>Subscriptions ends the {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
-                                <p>Avalaibles places : {{ event.users|length }} / {{ event.maxSub }}</p>
-                                <p>Stats : {{ event.status.label }}</p>
+                                <p>Subscriptions ends the {{ event.limitSubDate|date('d/m/Y') }}
+                                    at {{ event.limitSubDate|date('h:i') }}</p>
+                                <p>Available places : {{ event.users|length }} / {{ event.maxSub }}</p>
                             </div>
-
                             <p>
-
                                 {# Check if the current user is the organiser #}
-                                {% if app.user.pseudo != event.organiser.pseudo and event.limitSubDate <= date() %}
+                                {% if app.user.id != event.organiser.id and event.status.id == 2 %}
                                     {% if event in eventsCurrentUser %}
                                         <a href="{{ path('goOut_leave', {'id': event.id}) }}">Unsubscribe</a>
                                     {% else %}
                                         <a href="{{ path('goOut_participate', {'id': event.id}) }}">Subscribe</a>
                                     {% endif %}
-                                {% else %}
+                                {% elseif app.user.id == event.organiser.id %}
                                     {% if event.status.id == 2 %}
                                         <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify</a>
                                         <a href="{{ path('goOut_cancel', {'id': event.id}) }}">Cancel</a>
-                                    {% elseif event.status.id == 6 %}
-                                        <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and Republish</a>
+                                    {% elseif event.status.id >= 5 %}
+                                        <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and
+                                            Republish</a>
                                     {% else %}
                                         <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Publish</a>
                                     {% endif %}
+                                {% else %}
                                 {% endif %}
-
                             </p>
                         </div>
                     </div>
                 </li>
-            </ul>
-        {% endfor %}
+            {% endfor %}
+        </ul>
     {% endif %}
-
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
 
-    function initCampusNames(){
-    //json response
-    fetch("{{app_url_api}}/campus", {method:"GET"})
-        .then(response => response.json())
-        .then(response =>{
-            console.log(response);
-            let option = ""
-            response.map(campusName =>{
-                option += `<option value="${campusName.id}">${campusName.name}</option>`
-            })
-            console.log(option);
-            document.querySelector("#campusNames").innerHTML= option;
-        })
-        .catch(e=>(alert("ERROR : no options")))
-}
+        function initCampusNames() {
+            //json response
+            fetch("{{ app_url_api }}/campus", {method: "GET"})
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    let option = ""
+                    response.map(campusName => {
+                        option += `<option value="${campusName.id}">${campusName.name}</option>`
+                    })
+                    console.log(option);
+                    document.querySelector("#campusNames").innerHTML = option;
+                })
+                .catch(e => (alert("ERROR : no options")))
+        }
 
 
         window.onload = () => {

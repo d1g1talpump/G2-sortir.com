@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} | My Events
+{% endblock %}
+
+{% block body %}
+    <h1>My Events</h1>
+    <ul>
+        {% for event in myevents %}
+            {% set durationHours = event.duration / 60 %}
+            <li>
+                <a href="{{ path('goOut_modify', {'id': event.id}) }}">{{ event.name }}
+                    <ul>
+                        <li>Status : {{ event.status.label }}</li>
+                        <li>Start Date : {{ event.startDate|date('D d/m/y') }} at {{ event.startDate|date('h:i') }}</li>
+                        <li>Duration : {{ durationHours|round(2, 'floor') }} hours</li>
+                        <li>Subscription Ends : {{ event.limitSubDate|date('D d/m/y') }} at {{ event.limitSubDate|date('h:i') }}</li>
+                    </ul>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
