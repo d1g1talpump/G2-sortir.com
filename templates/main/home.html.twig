@@ -70,6 +70,7 @@
                             <div>
                                 <p>Subscriptions ends the {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
                                 <p>Avalaibles places : {{ event.users|length }} / {{ event.maxSub }}</p>
+                                <p>Stats : {{ event.status.label }}</p>
                             </div>
 
                             <p>
