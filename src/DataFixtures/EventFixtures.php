@@ -21,16 +21,16 @@ class EventFixtures extends Fixture implements DependentFixtureInterface, Fixtur
     {
         $faker = \Faker\Factory::create('fr_CA');
 
-        for($i = 0; $i <=100; $i++){
+        for($i = 0; $i <=2; $i++){
 
             $event = new Event();
 
             $event->setName($faker->unique()->word());
-            $event->setDuration($faker->numberBetween(66, 666));
+            $event->setDuration($faker->numberBetween(2, 3));
             $event->setInfos($faker->realText(200));
             $event->setMaxSub($faker->numberBetween(6, 66));
-            $event->setStartDate($faker->dateTimeInInterval('now', '+2months'));
-            $event->setLimitSubDate($faker->dateTimeInInterval($event->getStartDate(), '-1hour'));
+            $event->setStartDate($faker->dateTimeInInterval('now', '+2minutes'));
+            $event->setLimitSubDate($faker->dateTimeInInterval($event->getStartDate(), '-2minutes'));
             $event->setOrganiser($this->getReference(User::class.mt_rand(0,50)));
             $event->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
             $event->setPlace($this->getReference(Place::class.mt_rand(0,30)));
