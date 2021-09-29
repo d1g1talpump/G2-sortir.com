@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Status;
-use App\Entity\User;
 use App\Entity\Event;
 use App\Form\CancelEventFormType;
 use App\Form\EventFormType;
@@ -12,8 +11,8 @@ use App\Repository\EventRepository;
 use App\Repository\StatusRepository;
 use App\Services\SwearWordCensor;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -84,6 +83,20 @@ class GoOutController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/myevents", name="myevents")
+     */
+    public function myEvents(
+        EventRepository $eventRepository
+    ): Response
+    {
+        $userId = $this->getUser()->getId();
+        $myEvents = $eventRepository->allEventByOrganiserId($userId);
+
+        return $this->render('go_out/myevents.html.twig', [
+            'myevents' => $myEvents,
+        ]);
+    }
 
     /**
      * @Route("/details/{id}", name="details")

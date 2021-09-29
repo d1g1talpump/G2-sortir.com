@@ -1,18 +1,19 @@
 <nav>
     <ul>
         {% if app.user %}
-            <li>
-                <a href="{{ path('main_home') }}">
-                    <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
-                </a>
-            </li>
-            <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
-            <li><a href="{{ path('goOut_add') }}" title="Add an Event">Add an Event</a></li>
-            <li><a href="{{ path('profile_view', {'id': app.user.id}) }}" title="View Profile">View Profile</a></li>
-            <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out</a></li>
-            {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{ path('admin_dashboard') }}" title="Log Out">Admin Dashboard</a></li>
-            {% endif %}
+        <li>
+            <a href="{{ path('main_home') }}">
+                <img src="{{ asset('img/logo-GO.png') }}" alt="Go Out Logo">
+            </a>
+        </li>
+        <li><a href="{{ path('main_home') }}" title="Home">Home</a></li>
+        <li><a href="{{ path('goOut_add') }}" title="Add an Event">Add an Event</a></li>
+        <li><a href="{{ path('goOut_myevents') }}" title="My Events">My Events</a></li>
+        <li><a href="{{ path('profile_view', {'id': app.user.id}) }}" title="View Profile">View Profile</a></li>
+        <li><a href="{{ path('app_logout') }}" title="Log Out">Log Out</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('admin_dashboard') }}" title="Log Out">Admin Dashboard</a></li>
+        {% endif %}
     </ul>
 
     {% endif %}
