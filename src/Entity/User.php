@@ -127,6 +127,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
+        //TODO set up the change of roles
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
