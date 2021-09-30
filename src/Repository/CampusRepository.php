@@ -20,6 +20,10 @@ class CampusRepository extends ServiceEntityRepository
         parent::__construct($registry, Campus::class);
     }
 
+    /**
+     * Recherche par noms / Utilisée via API Campus
+     * @return Paginator
+     */
     public function findByName()
     {
         $queryBuilder = $this->createQueryBuilder('c')

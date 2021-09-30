@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Boolean;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -60,6 +61,7 @@ class Event
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups ("campusNames")
      */
     private $campus;
 
@@ -84,6 +86,11 @@ class Event
      * @ORM\Column(type="integer")
      */
     private $duration;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $DateCreated;
 
     public function __construct()
     {
@@ -239,6 +246,18 @@ class Event
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+        return $this->DateCreated;
+    }
+
+    public function setDateCreated(\DateTimeInterface $DateCreated): self
+    {
+        $this->DateCreated = $DateCreated;
 
         return $this;
     }
