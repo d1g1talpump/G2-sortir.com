@@ -1,0 +1,19 @@
+/* PROFIL */
+
+#profile-container{
+    width: 30%;
+    margin: auto;
+}
+#profile-header{
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+#profile-header div{
+    display: inline-block;
+    vertical-align: middle;
+}
+#profile-header h2{
+    font-family: Vesper, sans-serif;
+    font-size: 3em;
+    margin: auto; margin-left: 20%;
+}
