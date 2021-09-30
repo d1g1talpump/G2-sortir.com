@@ -6,20 +6,39 @@
 
 {% block body %}
     <h1>My Events</h1>
-    <ul>
+    <ul id="events-board">
         {% for event in myevents %}
             {% set durationHours = event.duration / 60 %}
-            <li>
-                <a href="{{ path('goOut_modify', {'id': event.id}) }}">{{ event.name }}
-                    <ul>
-                        <li>Status : {{ event.status.label }}</li>
-                        <li>Start Date : {{ event.startDate|date('D d/m/y') }} at {{ event.startDate|date('h:i') }}</li>
-                        <li>Duration : {{ durationHours|round(2, 'floor') }} hours</li>
-                        <li>Subscription Ends : {{ event.limitSubDate|date('D d/m/y') }} at {{ event.limitSubDate|date('h:i') }}</li>
-                    </ul>
-                </a>
+            <li onclick="window.location.href=`{{ path('goOut_modify', {'id': event.id}) }}`"
+                class="flex-container">
+                <div>
+                    <div class="flex-container row">
+                        <h2>{{ event.name }}</h2>
+                        <p>{{ event.status.label }}</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex-container row">
+                        <div>
+                            <p>Starting on : </p>
+                            <p>{{ event.startDate|date('D d/m/Y') }} at {{ event.startDate|date('h:i') }}</p>
+                            <p>Subscriptions ends : </p>
+                            <p>{{ event.limitSubDate|date('D d/m/Y') }}
+                                at {{ event.limitSubDate|date('h:i') }}</p>
+                            <p>Available places :</p>
+                            <p>{{ event.users|length }} / {{ event.maxSub }}</p>
+                        </div>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ul>
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
+{% endblock %}
+
 

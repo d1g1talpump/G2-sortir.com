@@ -15,3 +15,9 @@
 {% block title %}
     {{ parent() }} | Ooops
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
+{% endblock %}

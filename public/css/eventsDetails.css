@@ -1,0 +1,52 @@
+p {
+    margin-bottom: 0;
+}
+
+em {
+    padding-left: 20px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.eventDetails {
+    flex-direction: column;
+    width: 30%;
+    height: 475px;
+    padding: 20px;
+}
+
+.participantList {
+    width: 30%;
+}
+
+table {
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.participantList td, .participantList th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.participantList tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.participantList tr:hover {
+    background-color: #ddd;
+}
+
+.participantList th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #00ff00;
+    color: white;
+}

@@ -45,7 +45,12 @@
         <div class="btn-container">
             {{ form_widget(eventForm.publishEvent) }}
             {{ form_widget(eventForm.createEvent) }}
+            {% if eventStatusId == 2%}
+                <button><a href="{{ path('goOut_cancel', {'id': eventId}) }}">Cancel Event</a></button>
+            {% endif %}
         </div>
+
+
 
         <div class="form-link-container">
             <a href="{{ path('main_home') }}">Back to home</a>
@@ -59,3 +64,8 @@
     {{ parent() }} | Manage Event
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
+{% endblock %}

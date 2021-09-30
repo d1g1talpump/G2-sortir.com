@@ -19,7 +19,7 @@ class CancelEventFormType extends AbstractType
                 'label' => 'Reason to cancel'
             ])
             ->add('cancelEvent', SubmitType::class, [
-                'label' => 'Cancel Event'
+                'label' => 'Confirm'
             ]);
     }
 

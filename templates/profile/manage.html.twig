@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if not app.user %}
+    {% if not app.user or app.user.admin %}
         {{ include('inc/register.html.twig') }}
     {% else %}
         {{ include('inc/edit.html.twig') }}
@@ -16,3 +16,8 @@
     {% endif %}
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
+{% endblock %}

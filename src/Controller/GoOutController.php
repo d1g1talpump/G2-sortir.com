@@ -52,6 +52,8 @@ class GoOutController extends AbstractController
             'eventForm' => $eventForm->createView(),
             'add' => true,
             'campus' => $user->getCampus(),
+            'eventId' => null,
+            'eventStatusId' => null
         ]);
     }
 
@@ -69,6 +71,7 @@ class GoOutController extends AbstractController
         $event = $eventRepository->find($id);
         $status = $event->getStatus();
 
+
         $eventForm = $this->createForm(EventFormType::class, $event);
 
         $eventForm->handleRequest($request);
@@ -80,6 +83,8 @@ class GoOutController extends AbstractController
         return $this->render('go_out/manage.html.twig', [
             'eventForm' => $eventForm->createView(),
             'add' => false,
+            'eventId' => $event->getId(),
+            'eventStatusId' => $status->getId(),
         ]);
     }
 
@@ -132,8 +137,8 @@ class GoOutController extends AbstractController
 
         return $this->render('go_out/details.html.twig', [
             'event' => $event,
-            'currentUser'=>$currentUser,
-            'participants'=>$participants
+            'currentUser' => $currentUser,
+            'participants' => $participants
         ]);
     }
 
@@ -167,7 +172,8 @@ class GoOutController extends AbstractController
         int                    $id,
         StatusRepository       $statusRepository,
         EventRepository        $eventRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        SwearWordCensor        $swearWordCensor
     ): Response
     {
         $event = $eventRepository->find($id);
@@ -181,6 +187,9 @@ class GoOutController extends AbstractController
             if ($eventForm->get("cancelEvent")->isClicked()) {
                 $cancelState = $statusRepository->find(6);
                 $event->setStatus($cancelState);
+
+                $purifyString = $swearWordCensor->purify($event->getInfos());
+                $event->setInfos($purifyString);
             }
 
             $entityManager->persist($event);

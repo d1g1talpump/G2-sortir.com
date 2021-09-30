@@ -58,8 +58,8 @@
                     <div>
                         <div class="flex-container row">
                             <h2>{{ event.name }}</h2>
-                            <p>{{ event.startDate|date('D d/m/Y') }} at {{ event.startDate|date('h:i') }} </p>
                             <p>
+                                Organiser :
                                 {% if app.user.admin %}
                                     <a href="{{ path('admin_managePrivileges', {'id': event.organiser.id}) }}">{{ event.organiser.pseudo }}</a>
                                 {% else %}
@@ -72,15 +72,15 @@
                     <div>
                         <div class="flex-container row">
                             <div>
-
+                                <p>Event Date : </p>
+                                <p>{{ event.startDate|date('D d/m/Y') }} at {{ event.startDate|date('h:i') }} </p>
+                                <hr>
                                 <p>Subscriptions ends : </p>
-                                <p>The {{ event.limitSubDate|date('d/m/Y') }}
+                                <p>{{ event.limitSubDate|date('D d/m/Y') }}
                                     at {{ event.limitSubDate|date('h:i') }}</p>
-                                <p>Avalaibles places :</p>
-                                <p>
-                                    {{ event.users|length }} / {{ event.maxSub }}
-                                </p>
-
+                                <hr>
+                                <p>Available places :</p>
+                                <p>{{ event.users|length }} / {{ event.maxSub }}</p>
                             </div>
                             <p>
                                 {# Check if the current user is the organiser #}
@@ -135,4 +135,10 @@
             initCampusNames();
         }
     </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
 {% endblock %}

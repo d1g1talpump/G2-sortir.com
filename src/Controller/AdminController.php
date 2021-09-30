@@ -70,7 +70,6 @@ class AdminController extends AbstractController
     /**
      * @Route ("/managePrivileges/{id}", name="managePrivileges")
      */
-
     public function managePrivileges(
         Request                $request,
         int                    $id,
