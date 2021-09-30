@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>No Access</h1>
+
+    <p>
+        Oops it looks like te page tht you're requested is not accessible
+        you can <a href="{{ path('main_home') }}">return to the homepage</a>.
+    </p>
+    <p>
+        Or if this is an error and wish to contact our admin. Please email us <a href="mailto:admin@sortir.com"></a>
+    </p>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Ooops
+{% endblock %}
