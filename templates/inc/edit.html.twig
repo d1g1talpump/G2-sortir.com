@@ -37,7 +37,7 @@
 
 <div>
     {{ form_label(manageProfileForm.picture) }}
-    {{ form_widget(manageProfileForm.picture) }}
+    {{ form_widget(manageProfileForm.picture, {'attr': {'value': app.user.picture}} ) }}
 </div>
 
 <button type="submit" class="btn">Save</button>
