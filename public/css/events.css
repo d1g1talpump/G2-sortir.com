@@ -1,0 +1,43 @@
+/* EVENTS */
+
+#events-board{
+    margin: 0 auto; padding: 0;
+    list-style-type: none;
+    width: 380px;
+}
+#events-board li{
+    border: 1px solid lightsteelblue;
+    margin: 5vh 0;
+    transition: all 0.2s ease-in;
+}
+#events-board li:hover{
+    background: lightsteelblue;
+    color: #fff;
+}
+#events-board li > div{
+    display: inline-block;
+    height: 20vh;
+    margin: 0; padding: 2.5%;
+}
+#events-board .flex-container{
+    height: inherit;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+#events-board h2{
+    margin: 0; padding: 0;
+    overflow-wrap: break-word;
+}
+#events-board p{
+    margin: 0; padding: 0;
+    width: 100%;
+}
+#events-board li > div:first-child{
+    width: 30%;
+}
+#events-board li > div:last-child{
+    width: 60%;
+}
+#events-board li > div:last-child > .flex-container > p{
+    text-align: right;
+}

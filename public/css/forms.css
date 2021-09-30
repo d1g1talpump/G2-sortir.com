@@ -1,0 +1,82 @@
+/* FORM */
+
+/* general */
+form{
+    width: 20%;
+    margin: auto;
+    text-align: left;
+}
+input, textarea, select{
+    width: 100%; min-width: 200px; max-width: 100%;
+    box-sizing: border-box;
+}
+label{
+    display: block;
+    padding: 5% 0 0.5% 0;
+}
+input{
+    border-radius: 30px;
+}
+input[type="checkbox"]{
+    width: 40px; min-width: 0;
+    position: relative; bottom: -1px;
+    margin: 0; padding: 0;
+}
+button{
+    background: transparent;
+    width: 150px; max-width: 50%;
+    border: none; border-radius: 30px;
+    outline:none;
+    box-sizing: border-box;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2),
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+    font-family: Vesper-LightMedium, sans-serif;
+    font-size: 20px;
+}
+
+/* container */
+.btn-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 5vh 0;
+}
+
+.form-link-container{
+    width: 100%;
+    padding-bottom: 5vh;
+}
+.form-link-container a{
+    display: block;
+}
+
+/* search form */
+#search-form{
+    position: fixed; top:23vh; left: 3%;
+    overflow: hidden;
+}
+.search-form-field{
+    height: 80vh;
+}
+#show-hide-search-btn{
+    position: fixed; top: 15vh; left: 3%;
+    width: 230px;
+    margin: 0; padding-bottom: 0.5%;
+    text-align: left;
+    letter-spacing: 0.12em;
+    box-shadow: none;
+    border-bottom: 1px solid slategrey ; border-radius: 0;
+    transition: all 0.2s ease-in;
+}
+#show-hide-search-btn:hover{
+    background: lightsteelblue;
+    color: #fff;
+}
+
+
+
+
+
+
