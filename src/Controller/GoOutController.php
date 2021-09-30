@@ -210,6 +210,7 @@ class GoOutController extends AbstractController
         } elseif ($eventForm->get("publishEvent")->isClicked()) {
             $status = $entityManager->find(Status::class, 2);
         }
+        $event->setDateCreated(new \DateTime());
         $event->setStatus($status);
 
         $purifyString = $swearWordCensor->purify($event->getName());
