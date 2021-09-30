@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+    //AJOUTER UNE CAUSE POUR L'ANNULATION
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

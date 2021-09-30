@@ -16,38 +16,42 @@
         <h1 class="headmess"> Sorry, your account has been deactivated</h1>
         <h1 class="headmess">Please contact the <a href="mailto:admin@sortir.com">admin</a></h1>
     {% else %}
-        <h3>Event filters</h3>
-        <section>
-            <label>Campus</label>
-            <select id="campusNames">
-            </select>
+        <button id="show-hide-search-btn" onclick="animateElement()">Event filters close <<<</button>
+        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
 
-            <div>
+        <section id="search-form">
+            <div id="search-form-field">
+                <label>Campus</label>
+                <select id="campusNames">
+                </select>
                 <label>Search by words</label>
                 <input type="search">
-            </div>
-
-            <div>
                 <label>From</label>
                 <input type="date">
                 <label>To</label>
                 <input type="date">
+                <label>
+                    <input type="checkbox">
+                    Events where I am Organiser
+                </label>
+                <label>
+                    <input type="checkbox">
+                    Events I am subscribed to
+                </label>
+                <label>
+                    <input type="checkbox">
+                    Events I am not subscribed to
+                </label>
+                <label>
+                    <input type="checkbox">
+                    Past events
+                </label>
+                <div class="btn-container">
+                    <button>Search</button>
+                </div>
             </div>
-
-            <div>
-                <label>Events where I am Organiser</label>
-                <input type="checkbox">
-                <label>Events I am subscribed to</label>
-                <input type="checkbox">
-                <label>Events I am not subscribed to</label>
-                <input type="checkbox">
-                <label>Past events</label>
-                <input type="checkbox">
-            </div>
-
-            <button>Search</button>
         </section>
-        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
+
         {% for event in allEvents %}
             <ul id="events-board">
                 <li onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`" class="flex-container">
@@ -68,8 +72,12 @@
                     --><div>
                         <div class="flex-container row">
                             <div>
-                                <p>Subscriptions ends the {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
-                                <p>Avalaibles places : {{ event.users|length }} / {{ event.maxSub }}</p>
+                                <p>Subscriptions ends : </p>
+                                <p>The {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
+                                <p>Avalaibles places :</p>
+                                <p>
+                                    {{ event.users|length }} / {{ event.maxSub }}
+                                </p>
                             </div>
 
                             <p>
@@ -105,7 +113,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-
     function initCampusNames(){
     //json response
     fetch("{{app_url_api}}/campus", {method:"GET"})

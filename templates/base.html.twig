@@ -7,6 +7,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="{{ asset('img/favicon-GO.png') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/forms.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/events.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
         <title>{% block title %}GO !{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
@@ -18,6 +21,8 @@
             <script src="node_modules/jquery/jquery.js"></script>
             <script src="public/{{ asset('js/filtresAPI.js') }}"></script>
             {#{{ encore_entry_script_tags('app') }}#}
+            <script src="{{ asset('js/visuals library.js') }}"></script>
+
         {% endblock %}
     </head>
 

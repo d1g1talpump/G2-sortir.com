@@ -11,7 +11,8 @@
 
 {% block body %}
     {% if app.user.id == selectedUser.id %}
-        <h1>My Profile - {{ app.user.pseudo }}</h1>
+        <h1>My Profile</h1>
+        <h1>{{ app.user.pseudo }}</h1>
         <div id="profile-container">
             <div id="profile-header">
                 <div class="rounded-img">
@@ -20,9 +21,6 @@
                          class="big-img"
                     >
                 </div>
-            </div>
-            <div>
-                <span>Pseudo : </span>
             </div>
             <div>
                 <span>First Name : {{ app.user.firstname }}</span>
