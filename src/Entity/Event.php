@@ -85,6 +85,11 @@ class Event
      */
     private $duration;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $DateCreated;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -239,6 +244,18 @@ class Event
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+        return $this->DateCreated;
+    }
+
+    public function setDateCreated(\DateTimeInterface $DateCreated): self
+    {
+        $this->DateCreated = $DateCreated;
 
         return $this;
     }

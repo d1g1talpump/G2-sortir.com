@@ -35,6 +35,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface, Fixtur
             $event->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
             $event->setPlace($this->getReference(Place::class.mt_rand(0,30)));
             $event->setStatus($this->getReference(Status::class.mt_rand(1,2)));
+            $event->setDateCreated(new \DateTime());
 
 
             $manager->persist($event);
