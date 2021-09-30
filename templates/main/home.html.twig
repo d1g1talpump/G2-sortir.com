@@ -49,21 +49,8 @@
                     <button>Search</button>
                 </div>
             </div>
-
-            <div>
-                <label>Events where I am Organiser</label>
-                <input type="checkbox">
-                <label>Events I am subscribed to</label>
-                <input type="checkbox">
-                <label>Events I am not subscribed to</label>
-                <input type="checkbox">
-                <label>Past events</label>
-                <input type="checkbox">
-            </div>
-
-            <button id="searchButton">Search</button>
         </section>
-        <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
+
         <ul id="events-board">
             {% for event in allEvents %}
                 <li onclick="window.location.href=`{{ path('goOut_details', {'id': event.id}) }}`"
@@ -87,7 +74,8 @@
                             <div>
 
                                 <p>Subscriptions ends : </p>
-                                <p>The {{ event.limitSubDate|date('d/m/Y') }} at {{ event.limitSubDate|date('h:i') }}</p>
+                                <p>The {{ event.limitSubDate|date('d/m/Y') }}
+                                    at {{ event.limitSubDate|date('h:i') }}</p>
                                 <p>Avalaibles places :</p>
                                 <p>
                                     {{ event.users|length }} / {{ event.maxSub }}
