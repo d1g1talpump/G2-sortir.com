@@ -32,7 +32,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface, Fixtur
             $event->setStartDate($faker->dateTimeInInterval('now', '+2hours'));
             $event->setLimitSubDate($faker->dateTimeInInterval($event->getStartDate(), '-2minutes'));
             $event->setOrganiser($this->getReference(User::class.mt_rand(0,50)));
-            $event->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
+            $event->setCampus($this->getReference(Campus::class.mt_rand(0,2)));
             $event->setPlace($this->getReference(Place::class.mt_rand(0,30)));
             $event->setStatus($this->getReference(Status::class.mt_rand(1,2)));
             $event->setDateCreated(new \DateTime());

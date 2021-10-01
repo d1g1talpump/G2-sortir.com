@@ -13,9 +13,10 @@
         <h1 class="headmess"> Wanna Go Out ? </h1>
     {% elseif not app.user.active %}
         <h1 class="headmess"> Sorry, your account has been deactivated</h1>
-        <h1 class="headmess">Please contact the <a href="mailto:admin@sortir.com">admin</a></h1>
+        <h1 class="headmess">Please contact the admin at...</h1>
+        <h1><a href="mailto:admin@sortir.com">admin@sortir.com</a></h1>
     {% else %}
-        <button id="show-hide-search-btn" onclick="animateElement()">Event filters close <<<</button>
+        <button id="show-hide-search-btn" onclick="animateElement()">Hide Filters <<<</button>
         <h1> Still wanna Go Out {{ app.user.pseudo }} ? </h1>
 
         <section id="search-form">

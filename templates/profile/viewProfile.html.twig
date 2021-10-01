@@ -19,25 +19,10 @@
                     <img src="{{ asset('img/profiles/' ~ app.user.picture)}}"
                          alt="Profil's picture of the user"
                          class="big-img"
-                    >
+                         >
                 </div>
-            </div>
-            <div>
-                <span>First Name : {{ app.user.firstname }}</span>
-            </div>
-            <div>
-                <span>Last Name : {{ app.user.lastname }}</span>
-            </div>
-            <div>
-                <span>Telephone : {{ app.user.telephone }}</span>
-            </div>
-            <div>
-                <span>Email : {{ app.user.email }}</span>
-            </div>
-            <div>
-                <span>Campus : {{ app.user.campus.name }}</span>
-            </div>
-
+        </div>
+        {{ include('inc/userSummary.html.twig') }}
         <div class="btn-container">
             <button>
                 <a href="{{ path('profile_manage') }}">Edit profile</a>
