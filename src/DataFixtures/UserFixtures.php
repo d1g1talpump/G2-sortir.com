@@ -34,7 +34,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface, Fixture
             $user->setTelephone($faker->phoneNumber());
             $user->setAdmin(false);
             $user->setActive(true);
-            $user->setCampus($this->getReference(Campus::class.mt_rand(0,15)));
+            $user->setCampus($this->getReference(Campus::class.mt_rand(0,2)));
             $user->setRoles(["ROLE_USER"]);
             $user->setPassword($hash);
             $random = random_int(1, 6);

@@ -29,7 +29,6 @@ class StatusFixtures extends Fixture implements FixtureGroupInterface
                     break;
                  case 7: $status->setLabel('HIDE ME');
                     break;
-                 default : $status->setLabel("Published");
              }
              $manager->persist($status);
              $manager->flush();

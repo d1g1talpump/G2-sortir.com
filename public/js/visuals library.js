@@ -12,7 +12,7 @@ function animateElement(){
             duration: 500,
         });
         $elementToAnimate.style.height = '80vh';
-        $button.textContent = "Event filters close <<<"
+        $button.textContent = "Close filters <<<"
     }else{
         $elementToAnimate.animate([
             // keyframes
@@ -23,6 +23,6 @@ function animateElement(){
             duration: 500,
         });
         $elementToAnimate.style.height = '0px';
-        $button.textContent = "Event filters open >>>"
+        $button.textContent = "Open filters >>>"
     }
 }
