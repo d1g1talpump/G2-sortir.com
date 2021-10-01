@@ -98,6 +98,7 @@
                                     {% elseif event.status.id >= 5 %}
                                         <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Modify and
                                             Republish</a>
+                                    {% elseif event.status.id == 4 %}
                                     {% else %}
                                         <a href="{{ path('goOut_modify', {'id' : event.id}) }}">Publish</a>
                                     {% endif %}

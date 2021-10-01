@@ -22,9 +22,11 @@
                         <div>
                             <p>Starting on : </p>
                             <p>{{ event.startDate|date('D d/m/Y') }} at {{ event.startDate|date('h:i') }}</p>
+                            <hr>
                             <p>Subscriptions ends : </p>
                             <p>{{ event.limitSubDate|date('D d/m/Y') }}
                                 at {{ event.limitSubDate|date('h:i') }}</p>
+                            <hr>
                             <p>Available places :</p>
                             <p>{{ event.users|length }} / {{ event.maxSub }}</p>
                         </div>

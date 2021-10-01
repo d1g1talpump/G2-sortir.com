@@ -24,7 +24,8 @@ class EventRepository extends ServiceEntityRepository
     public function allEventsForHomePage()
     {
         $queryBuilder = $this->createQueryBuilder('e')
-            ->andWhere("e.status BETWEEN 2 AND 6");
+            ->andWhere("e.status BETWEEN 2 AND 6")
+            ->addOrderBy('e.DateCreated', 'DESC');
         $query = $queryBuilder->getQuery();
         return new Paginator($query);
     }

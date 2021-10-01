@@ -29,14 +29,17 @@ class ProfileController extends AbstractController
         UserRepository               $userRepository
     ): Response
     {
+        $newUser = false;
 
         if ($this->getUser()) {
             $user = $userRepository->find($this->getUser()->getId());
+            $currentPicture = $user->getPicture();
         } else {
             $user = new User();
             $user->setAdmin(false)
                 ->setActive(true)
                 ->setRoles(["ROLE_USER"]);
+            $newUser = true;
         }
 
         $form = $this->createForm(ManageProfileFormType::class, $user);
@@ -46,8 +49,8 @@ class ProfileController extends AbstractController
 
             //recupere le photo choisie par l'utilisateur
             $file = $form->get('picture')->getData();
-            if($file != null && !$user->getPicture()){
 
+            if($file != null){
                 //crypte le nom du fichier avec un id unique
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
@@ -55,10 +58,12 @@ class ProfileController extends AbstractController
                 $file->move($this->getParameter('users_profiles_directory'), $fileName);
                 $user->setPicture($fileName);
 
-            //sinon ajoute une photo par defaut parmis 6 fichiers
-            }else{
+                //sinon ajoute une photo par defaut parmis 6 fichiers
+            }elseif ($newUser){
                 $random = random_int(1, 6);
                 $user->setPicture('/default/'.$random.'.jpg');
+            }else{
+                $user->setPicture($currentPicture);
             }
 
             // encode the plain password
@@ -70,6 +75,7 @@ class ProfileController extends AbstractController
             );
 
             $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($user);
             $entityManager->flush();
 
